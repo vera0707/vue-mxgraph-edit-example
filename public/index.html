@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <link href='https://fonts.cat.net/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <title>vue-mxgraph-edit</title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but toolbarDemo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <script type="text/javascript">
+      var urlParams = (function(url){
+        var result = new Object();
+        var idx = url.lastIndexOf('?');
+        if (idx > 0){
+          var params = url.substring(idx + 1).split('&');
+          for (var i = 0; i < params.length; i++){
+            idx = params[i].indexOf('=');
+            if (idx > 0){
+              result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+            }
+          }
+        }
+        return result;
+      })(window.location.href);
+      mxLoadResources = false;
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>
