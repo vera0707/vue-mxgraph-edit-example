@@ -5,8 +5,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import 'element-plus/lib/theme-chalk/index.css';
-import '@/style/mxgraph.css';
-import '@/style/reset.css';
+import '@/styles/reset.css';
 
 createApp(App)
   .use(ElementPlus)
