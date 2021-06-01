@@ -1802,7 +1802,7 @@ var OutlineWindow = function(editorUi, x, y, w, h)
 
 	var div = document.createElement('div');
 	div.style.position = 'absolute';
-	div.style.width = '100%';
+	div.style.width = '250';
 	div.style.height = '100%';
 	div.style.border = '1px solid whiteSmoke';
 	div.style.overflow = 'hidden';

@@ -460,7 +460,7 @@
 			 this.addMenuItems(menu, ['formatPanel'], parent);
 		 }
 		 
-		 this.addMenuItems(menu, ['outline', 'layers'], parent);
+		 this.addMenuItems(menu, ['outline'], parent);
 	 })));
 	 this.put('viewZoom', new Menu(mxUtils.bind(this, function(menu, parent)
 	 {

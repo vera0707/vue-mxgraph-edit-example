@@ -387,9 +387,9 @@ div.mxWindow .geButton {
 	background: #eee;
 	border-radius:2px;
 }
-.geSidebarContainer .geTitle:active {
+/* .geSidebarContainer .geTitle:active {
 	background-color:#F8C382;
-}
+} */
 .geSidebarContainer .geDropTarget {
 	border-radius:10px;
 	border:2px dotted #b0b0b0;
@@ -397,7 +397,7 @@ div.mxWindow .geButton {
 	padding:6px;
 	margin:6px;
 	color:#a0a0a0;
-	fontSize:13px;
+	font-size:13px;
 }
 .geTitle img {
 	opacity:0.5;
