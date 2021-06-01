@@ -4,7 +4,7 @@
 /**
  * Constructs a new graph editor
  */
-EditorUi = function(editor, container, lightbox)
+ EditorUi = function(editor, container, lightbox)
  {
 	 mxEventSource.call(this);
 	 
@@ -982,12 +982,13 @@ EditorUi = function(editor, container, lightbox)
  /**
 	* Specifies the size of the split bar.
 	*/
- EditorUi.prototype.splitSize = (mxClient.IS_TOUCH || mxClient.IS_POINTER) ? 12 : 8;
+ // EditorUi.prototype.splitSize = (mxClient.IS_TOUCH || mxClient.IS_POINTER) ? 12 : 8;
+ EditorUi.prototype.splitSize = 0;
  
  /**
 	* Specifies the height of the menubar. Default is 30.
 	*/
- EditorUi.prototype.menubarHeight = 30;
+ EditorUi.prototype.menubarHeight = 0;
  
  /**
 	* Specifies the width of the format panel should be enabled. Default is true.
@@ -1002,12 +1003,12 @@ EditorUi = function(editor, container, lightbox)
  /**
 	* Specifies the height of the toolbar. Default is 38.
 	*/
- EditorUi.prototype.toolbarHeight = 38;
+ EditorUi.prototype.toolbarHeight = 40;
  
  /**
 	* Specifies the height of the footer. Default is 28.
 	*/
- EditorUi.prototype.footerHeight = 28;
+ EditorUi.prototype.footerHeight = 10;
  
  /**
 	* Specifies the height of the optional sidebarFooterContainer. Default is 34.
@@ -1018,7 +1019,7 @@ EditorUi = function(editor, container, lightbox)
 	* Specifies the position of the horizontal split bar. Default is 240 or 118 for
 	* screen widths <= 640px.
 	*/
- EditorUi.prototype.hsplitPosition = (screen.width <= 640) ? 118 : ((urlParams['sidebar-entries'] != 'large') ? 212 : 240);
+ EditorUi.prototype.hsplitPosition = (screen.width <= 640) ? 118 : ((urlParams['sidebar-entries'] != 'large') ? 250 : 260);
  
  /**
 	* Specifies if animations are allowed in <executeLayout>. Default is true.

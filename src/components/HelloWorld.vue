@@ -21,10 +21,9 @@ export default {
   line-height: 24px;
   color: #475669;
   border-bottom: 1px solid #ccd5e0;
-  padding: 3px 8px;
-  padding-top: 0px;
-  margin-top: 3px;
+  padding: 0 3px 8px;
   overflow: hidden;
+  margin-top: 3px;
   font-size: 12px;
 }
 </style>

@@ -20,6 +20,7 @@ const venderList = [
 
 const assetHtmlList = venderList.map((name) => ({
   filepath: require.resolve(name.startsWith('mxgraph') ? name : `./src/core/graphEdit/${name}`),
+  name: '[name]_[hash]',
 }));
 
 module.exports = {

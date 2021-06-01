@@ -1,12 +1,16 @@
 <template>
- <div
-    class="graphEditorContainer"
-    ref="editorContainer"
-  >
+  <div class="editMainContainer">
+    <div class="editLegendHeader">
+      <div>
+        <i class="el-icon-plus"></i>
+        新增
+      </div>
+    </div>  
+    <div class="graphEditorContainer" ref="editorContainer"></div>
   </div>
 </template>
 <script>
-import './styles/grapheditor.css'
+import '@/styles/grapheditor.css'
 export default {
   name: "GraphEdit",
   data() {
@@ -50,10 +54,17 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss" scoped>
+.editMainContainer{
+  position: relative;
+
+  .editLegendHeader{
+    position: absolute;
+  }
+}
 .graphEditorContainer{
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 37px);
   position: relative;
 }
 </style>

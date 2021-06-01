@@ -621,7 +621,8 @@
 	 if (graph.container != null)
 	 {
 		 graph.view.validateBackground();
-		 graph.container.style.overflow = (graph.scrollbars) ? 'auto' : this.defaultGraphOverflow;
+		 graph.container.style.overflow = this.defaultGraphOverflow;
+		 // graph.container.style.overflow = (graph.scrollbars) ? 'auto' : this.defaultGraphOverflow;
 		 
 		 this.fireEvent(new mxEventObject('updateGraphComponents'));
 	 }
@@ -2345,6 +2346,7 @@
 							 {
 								 graph.dblClick(evt);
 							 })
+							 
 						 );
 						 
 						 // Adds basic listeners for graph event dispatching outside of the
@@ -2441,22 +2443,22 @@
 			 canvas = canvas.ownerSVGElement;
 		 }
 		 
-		 if (graph.view.backgroundPageShape != null)
-		 {
-			 graph.view.backgroundPageShape.node.style.backgroundPosition = position;
-			 graph.view.backgroundPageShape.node.style.backgroundImage = image;
-			 graph.view.backgroundPageShape.node.style.backgroundColor = color;
-			 graph.container.className = 'geDiagramContainer geDiagramBackdrop';
-			 canvas.style.backgroundImage = 'none';
-			 canvas.style.backgroundColor = '';
-		 }
-		 else
-		 {
+		 // if (graph.view.backgroundPageShape != null)
+		 // {
+		 // 	graph.view.backgroundPageShape.node.style.backgroundPosition = position;
+		 // 	graph.view.backgroundPageShape.node.style.backgroundImage = image;
+		 // 	graph.view.backgroundPageShape.node.style.backgroundColor = color;
+		 // 	graph.container.className = 'geDiagramContainer geDiagramBackdrop';
+		 // 	canvas.style.backgroundImage = 'none';
+		 // 	canvas.style.backgroundColor = '';
+		 // }
+		 // else
+		 // {
 			 graph.container.className = 'geDiagramContainer';
 			 canvas.style.backgroundPosition = position;
 			 canvas.style.backgroundColor = color;
 			 canvas.style.backgroundImage = image;
-		 }
+		 // }
 	 };
 	 
 	 // Returns the SVG required for painting the background grid.
