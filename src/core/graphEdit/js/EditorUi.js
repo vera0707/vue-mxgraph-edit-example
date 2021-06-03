@@ -1008,7 +1008,7 @@
  /**
 	* Specifies the height of the footer. Default is 28.
 	*/
- EditorUi.prototype.footerHeight = 10;
+ EditorUi.prototype.footerHeight = 0;
  
  /**
 	* Specifies the height of the optional sidebarFooterContainer. Default is 34.

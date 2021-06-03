@@ -1,0 +1,69 @@
+<template>
+  <el-dialog
+    title="保存拓扑"
+    class="odialog"
+    :model-value="isVisible"
+    :before-close="dialogClose"
+    :close-on-click-modal="false"
+    width="420px"
+  >
+    <el-form
+      ref="dialogForm"
+      :model="formData"
+      label-position="right"
+      label-width="80px"
+      :rules="actionDialogRules"
+    >
+      <el-form-item label="拓扑名称" prop="name">
+        <el-input v-model="formData.name" placeholder="请输入"></el-input>
+      </el-form-item>
+      <el-form-item label="备注" prop="remark">
+        <el-input
+          v-model="formData.remark"
+          type="textarea"
+          :rows="2"
+          placeholder="请输入"
+        ></el-input>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogClose" size="small">取 消</el-button>
+        <el-button type="primary" @click="dialogConfirm" size="small"
+          >查 询</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
+</template>
+<script>
+const actionDialogRules = {
+  name: [{ required: true, message: '请输入', trigger: 'change' }],
+};
+export default {
+  name: 'saveEdit',
+  props: {
+    isVisible: Boolean || false,
+    detailData: Object || {},
+  },
+  data() {
+    return {
+      formData: {},
+      actionDialogRules,
+    };
+  },
+  methods: {
+    dialogClose() {
+      this.$emit('onDialogClose');
+    },
+    dialogConfirm() {
+      this.$refs.dialogForm.validate((valid) => {
+        if (valid) {
+          this.$message.success('保存成功');
+          this.$emit('onDialogConfirm');
+        }
+      });
+    },
+  },
+};
+</script>

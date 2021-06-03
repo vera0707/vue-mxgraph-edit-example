@@ -397,11 +397,13 @@ Actions.prototype.init = function()
 			graph.startEditingAtCell();
 		}
 	}, null, null, 'F2/Enter');
+	// 右键保存数据
 	this.addAction('editData...', function()
 	{
 		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
 		ui.showDataDialog(cell);
 	}, null, null, Editor.ctrlKey + '+M');
+
 	this.addAction('editTooltip...', function()
 	{
 		if (graph.isEnabled() && !graph.isSelectionEmpty())

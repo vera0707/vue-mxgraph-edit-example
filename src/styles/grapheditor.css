@@ -56,8 +56,9 @@
 }
 .geDiagramContainer {
 	background-color:#ffffff;
-	font-size:0px;
-	outline:none;
+	font-size: 12px;
+	/* outline:none; */
+	width: 100%;
 }
 .geMenubar, .geToolbar {
 	white-space:nowrap;
@@ -797,11 +798,9 @@ table.mxPopupMenu tr {
 	color: #2d3e53;
 }
 html td.mxWindowTitle {
-	font-family:Helvetica Neue,Helvetica,Arial Unicode MS,Arial;
  	text-align:left;
  	font-size:12px;
- 	color:rgb(112, 112, 112);
- 	padding:4px;
+ 	padding: 6px 10px;
 }
 .gePropHeader, .gePropRow {
 	border: 1px solid #e9e9e9;	

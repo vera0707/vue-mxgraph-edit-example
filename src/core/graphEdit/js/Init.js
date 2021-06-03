@@ -17,6 +17,6 @@ window.STYLE_PATH = window.STYLE_PATH || 'styles';
 // window.CSS_PATH = window.CSS_PATH || 'styles';
 window.OPEN_FORM = window.OPEN_FORM || 'open.html';
 
-window.mxBasePath = window.mxBasePath || '../';
+window.mxBasePath = window.mxBasePath || '/';
 window.mxLanguage = window.mxLanguage || window.urlParams.lang;
 window.mxLanguages = window.mxLanguages || ['de', 'se'];

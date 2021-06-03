@@ -2,15 +2,15 @@
   <div class="editMainContainer">
     <div class="editLegendHeader">
       <div @click="handleThumbnail" class="legendItem">
-        <i class="el-icon-plus"></i>
+        <i class="el-icon-coordinate"></i>
         缩略图
       </div>
       <div class="legendItem">
-        <i class="el-icon-plus"></i>
+        <img src="~@/assets/add.svg" width="10" alt="">
         新增
       </div>
-      <div class="legendItem">
-        <i class="el-icon-plus"></i>
+      <div class="legendItem" @click="saveTopo">
+        <img src="~@/assets/save.svg" width="10" alt="">
         保存
       </div>
       <div class="legendItem">
@@ -21,24 +21,47 @@
       </div>
     </div>  
     <div class="graphEditorContainer" ref="editorContainer"></div>
+    <SaveEdit 
+      :isVisible="saveEidt"
+      :detailData="topoData"
+      v-on:onDialogClose="saveEidt=false;topoData={}"
+      v-on:onDialogConfirm="saveCurrentTopo"
+    />
   </div>
 </template>
 <script>
+import SaveEdit from '@/components/SaveEdit';
+
 import '@/styles/grapheditor.css'
 export default {
   name: "GraphEdit",
+  components:{
+    SaveEdit
+  },
   data() {
     return {
       graph: null,
-      loading: false,
+      editorUiInit: false,
       topoVal: '',
+      saveEidt: false,
+      topoData: {},
     };
   },
   methods: {
     handleThumbnail() {
       this.editorUiInit.actions.get('outline').funct();
       this.editorUiInit.refresh();
-    }
+    },
+    saveTopo() {
+      var encoder = new mxCodec();
+			// 获取图的XML格式代码片段
+		  this.topoData = encoder.encode(this.editorUiInit.editor.graph.getModel());
+      this.saveEidt = true;
+    },
+    saveCurrentTopo(data) {
+      this.saveEidt=false;
+      this.topoData={}
+    },
   },
   mounted() {
     const self = this;

@@ -8,7 +8,7 @@ import 'element-plus/lib/theme-chalk/index.css';
 import '@/styles/reset.css';
 
 createApp(App)
-  .use(ElementPlus)
+  .use(ElementPlus, { size: 'small' })
   .use(store)
   .use(router)
   .mount('#app');
