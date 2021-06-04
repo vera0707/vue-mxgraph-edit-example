@@ -2669,7 +2669,6 @@
  
 		 var bounds = new mxRectangle(this.scale * (this.translate.x + x0 * pw), this.scale *
 				 (this.translate.y + y0 * ph), this.scale * rows * pw, this.scale * cols * ph);
-		 
 		 return bounds;
 	 };
 	 

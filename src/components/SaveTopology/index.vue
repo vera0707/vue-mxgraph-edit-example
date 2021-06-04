@@ -30,7 +30,7 @@
       <span class="dialog-footer">
         <el-button @click="dialogClose" size="small">取 消</el-button>
         <el-button type="primary" @click="dialogConfirm" size="small"
-          >查 询</el-button
+          >确 定</el-button
         >
       </span>
     </template>
@@ -51,6 +51,13 @@ export default {
       formData: {},
       actionDialogRules,
     };
+  },
+  watch: {
+    isVisible(val) {
+      if (!val) {
+        this.$refs.dialogForm.resetFields();
+      }
+    },
   },
   methods: {
     dialogClose() {

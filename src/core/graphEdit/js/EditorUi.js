@@ -3817,10 +3817,10 @@
 	 // Creates the format sidebar
 	 this.format = (this.editor.chromeless || !this.formatEnabled) ? null : this.createFormat(this.formatContainer);
 	 
-	 if (this.format != null)
-	 {
-		 this.container.appendChild(this.formatContainer);
-	 }
+	//  if (this.format != null)
+	//  {
+	// 	 this.container.appendChild(this.formatContainer);
+	//  }
 	 
 	 // Creates the footer
 	 var footer = (this.editor.chromeless) ? null : this.createFooter();

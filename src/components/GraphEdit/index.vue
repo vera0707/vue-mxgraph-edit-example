@@ -21,30 +21,38 @@
       </div>
     </div>  
     <div class="graphEditorContainer" ref="editorContainer"></div>
-    <SaveEdit 
-      :isVisible="saveEidt"
+    <EditCellProperty
+      v-show="cellProperty"
+      :isVisible="cellProperty"
+     />
+    <SaveTopology 
+      :isVisible="saveCurrentTopo"
       :detailData="topoData"
-      v-on:onDialogClose="saveEidt=false;topoData={}"
-      v-on:onDialogConfirm="saveCurrentTopo"
+      v-on:onDialogClose="saveCurrentTopo=false;topoData={}"
+      v-on:onDialogConfirm="saveCurrentTopo=false;topoData={}"
     />
   </div>
 </template>
 <script>
-import SaveEdit from '@/components/SaveEdit';
+import SaveTopology from '@/components/SaveTopology';
+import EditCellProperty from '@/components/EditCellProperty';
 
 import '@/styles/grapheditor.css'
 export default {
   name: "GraphEdit",
   components:{
-    SaveEdit
+    SaveTopology,
+    EditCellProperty
   },
   data() {
     return {
       graph: null,
       editorUiInit: false,
       topoVal: '',
-      saveEidt: false,
+      saveCurrentTopo: false,
       topoData: {},
+      cellProperty: false,
+      cellData: {},
     };
   },
   methods: {
@@ -56,11 +64,7 @@ export default {
       var encoder = new mxCodec();
 			// 获取图的XML格式代码片段
 		  this.topoData = encoder.encode(this.editorUiInit.editor.graph.getModel());
-      this.saveEidt = true;
-    },
-    saveCurrentTopo(data) {
-      this.saveEidt=false;
-      this.topoData={}
+      this.saveCurrentTopo = true;
     },
   },
   mounted() {
@@ -104,7 +108,7 @@ export default {
   .editLegendHeader{
     position: absolute;
     top: 0;
-    left: 400px;
+    left: 350px;
     z-index: 10;
     font-size: 12px;
     height: 40px;
