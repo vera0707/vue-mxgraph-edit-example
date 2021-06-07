@@ -1043,6 +1043,10 @@
 		 var graph = this.editorUi.editor.graph;
 		 var menu = null;
 		 var show = true;
+		 var $editLegendHeader = document.getElementsByClassName('editLegendHeader');
+
+		if(showLabels) $editLegendHeader[0].style.left = '350px';
+		else $editLegendHeader[0].style.left = '640px';
  
 		 mxEvent.addListener(elt, 'click', mxUtils.bind(this, function(evt)
 		 {
@@ -1078,7 +1082,7 @@
 					 this.currentElt = null;
 				 }));
 			 }
-			 
+
 			 show = true;
 			 mxEvent.consume(evt);
 		 }));

@@ -6,12 +6,16 @@
         缩略图
       </div>
       <div class="legendItem">
-        <img src="~@/assets/add.svg" width="10" alt="">
+        <img src="~@/assets/add.svg" width="10" alt="" />
         新增
       </div>
       <div class="legendItem" @click="saveTopo">
-        <img src="~@/assets/save.svg" width="10" alt="">
+        <img src="~@/assets/save.svg" width="10" alt="" />
         保存
+      </div>
+      <div class="legendItem" @click="editCell">
+        <i class="el-icon-edit"></i>
+        编辑数据
       </div>
       <div class="legendItem">
         <span style="margin-right: 10px">拓扑选择</span>
@@ -19,36 +23,44 @@
           <el-option label="test" value="test">test</el-option>
         </el-select>
       </div>
-    </div>  
+    </div>
     <div class="graphEditorContainer" ref="editorContainer"></div>
     <EditCellProperty
-      v-show="cellProperty"
       :isVisible="cellProperty"
-     />
-    <SaveTopology 
+      :detailData="cellData"
+      v-on:onDialogClose="
+        cellProperty = false;
+        cellData = {};
+      "
+      v-on:onDialogConfirm="saveActiveCell"
+    />
+    <SaveTopology
       :isVisible="saveCurrentTopo"
       :detailData="topoData"
-      v-on:onDialogClose="saveCurrentTopo=false;topoData={}"
-      v-on:onDialogConfirm="saveCurrentTopo=false;topoData={}"
+      v-on:onDialogClose="
+        saveCurrentTopo = false;
+        topoData = {};
+      "
+      v-on:onDialogConfirm="saveActiveCell"
     />
   </div>
 </template>
 <script>
-import SaveTopology from '@/components/SaveTopology';
-import EditCellProperty from '@/components/EditCellProperty';
+import SaveTopology from "@/components/SaveTopology";
+import EditCellProperty from "@/components/EditCellProperty";
 
-import '@/styles/grapheditor.css'
+import "@/styles/grapheditor.css";
 export default {
   name: "GraphEdit",
-  components:{
+  components: {
     SaveTopology,
-    EditCellProperty
+    EditCellProperty,
   },
   data() {
     return {
       graph: null,
       editorUiInit: false,
-      topoVal: '',
+      topoVal: "",
       saveCurrentTopo: false,
       topoData: {},
       cellProperty: false,
@@ -57,15 +69,37 @@ export default {
   },
   methods: {
     handleThumbnail() {
-      this.editorUiInit.actions.get('outline').funct();
+      this.editorUiInit.actions.get("outline").funct();
       this.editorUiInit.refresh();
     },
     saveTopo() {
       var encoder = new mxCodec();
-			// 获取图的XML格式代码片段
-		  this.topoData = encoder.encode(this.editorUiInit.editor.graph.getModel());
+      // 获取图的XML格式代码片段
+      this.topoData = encoder.encode(this.editorUiInit.editor.graph.getModel());
       this.saveCurrentTopo = true;
     },
+    saveActiveCell(cellProperty) {
+      const { cell} = this.cellData;
+      var doc = mxUtils.createXmlDocument();
+      var obj = doc.createElement('object');
+      Object.keys(cellProperty).forEach(v=>{
+        obj.setAttribute(v,cellProperty[v]);
+      })
+      this.editorUiInit.editor.graph.getModel().setValue(cell, obj);
+      this.cellProperty = false;
+      this.cellData = {};
+    },
+    editCell() {
+      const graph = this.editorUiInit.editor.graph;
+      const cell = graph.getSelectionCell();
+      if(!cell) {
+        this.$message.warning("请先选择组件");
+        return;
+      }
+      const value = graph.getModel().getValue(cell);
+      this.cellProperty = true;
+      this.cellData = {cell,value};
+    }
   },
   mounted() {
     const self = this;
@@ -75,7 +109,16 @@ export default {
 
     EditorUi.prototype.init = function () {
       editorUiInit.apply(this, arguments);
-      this.actions.get("export").setEnabled(false);    
+      this.actions.get("export").setEnabled(false);
+      this.actions.addAction(
+        "editData...",
+        function () {
+          self.editCell();
+        },
+        null,
+        null,
+        "Cmd+M"
+      );
     };
 
     mxResources.loadDefaultBundle = false;
@@ -85,27 +128,30 @@ export default {
 
     mxUtils.getAll(
       [bundle, "./default.xml"],
-      function (xhr) {
+      (xhr) => {
         // 加载汉化文件
         mxResources.parse(xhr[0].getText());
         const themes = {};
         themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
 
         // 启动
-        self.editorUiInit = new EditorUi(new Editor(urlParams["chrome"] == "0", themes),container);
+        this.editorUiInit = new EditorUi(
+          new Editor(urlParams["chrome"] == "0", themes),
+          container
+        );
       },
-      function () {
-        $Message.error('当前浏览器不支持')
+      () => {
+        $Message.error("当前浏览器不支持");
       }
     );
   },
 };
 </script>
 <style lang="scss" scoped>
-.editMainContainer{
+.editMainContainer {
   position: relative;
 
-  .editLegendHeader{
+  .editLegendHeader {
     position: absolute;
     top: 0;
     left: 350px;
@@ -113,15 +159,19 @@ export default {
     font-size: 12px;
     height: 40px;
     display: flex;
-    color: #2D3E53;
+    color: #2d3e53;
     align-items: center;
-    .legendItem{
+    .legendItem {
       cursor: pointer;
       margin-right: 15px;
+
+      &.disable{
+        opacity: 0.2;
+      }
     }
   }
 }
-.graphEditorContainer{
+.graphEditorContainer {
   width: 100vw;
   height: calc(100vh - 37px);
   position: relative;

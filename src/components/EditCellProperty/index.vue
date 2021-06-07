@@ -1,18 +1,20 @@
 <template>
-  <div class="graphCellProperty">
-    <div class="property-header">
-        组件属性
-        <i class="el-icon-close" @click="dialogClose"></i>
-      </div>
-      <div class="property-content">
-       <el-form
-          ref="dialogForm"
-          :model="formData"
-          label-position="top"
-          label-width="80px"
-          :rules="actionDialogRules"
-        >
-          <el-form-item label="组件名称" prop="name">
+  <el-dialog
+    title="组件属性"
+    class="odialog"
+    :model-value="isVisible"
+    :before-close="dialogClose"
+    :close-on-click-modal="false"
+    width="500px"
+  >
+    <el-form
+      ref="dialogForm"
+      :model="formData"
+      label-position="right"
+      label-width="110px"
+      :rules="actionDialogRules"
+    >
+      <el-form-item label="组件名称" prop="name">
             <el-input v-model="formData.name" clearable placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="网络类型" prop="type">
@@ -29,15 +31,18 @@
             <el-input v-model="formData.relateNe" clearable placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="备注" prop="remark">
-            <el-input type="textarea" :rows="2" placeholder="请输入" clearable></el-input>
+            <el-input v-model="formData.remark" type="textarea" :rows="2" placeholder="请输入" clearable></el-input>
           </el-form-item>
-       </el-form>
-      </div>
-      <div class="property-footer">
-        <el-button size="small" @click="dialogClose">取消</el-button>
-        <el-button type="primary" size="small" @click="dialogConfirm">确定</el-button>
-      </div>
-  </div>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogClose" size="small">取 消</el-button>
+        <el-button type="primary" @click="dialogConfirm" size="small"
+          >确 定</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 <script>
 const inputRequire = { required: true, message: '请输入', trigger: 'change' };
@@ -49,8 +54,9 @@ const actionDialogRules = {
   neType: [selectRequire],
   relateNe: [inputRequire],
 };
+
 export default {
-  name: 'editCellProperty',
+  name: 'saveEdit',
   props: {
     isVisible: Boolean || false,
     detailData: Object || {},
@@ -61,6 +67,24 @@ export default {
       actionDialogRules,
     };
   },
+  watch: {
+    isVisible(val) {
+      if (!val) {
+        this.$refs.dialogForm.resetFields();
+      }
+    },
+    detailData(cellData) {
+      if (this.isVisible) {
+        if (cellData.value) {
+          const formData = {};
+          cellData.value.getAttributeNames().forEach((v) => {
+            formData[v] = cellData.value.getAttribute(v);
+          });
+          this.formData = formData;
+        } else this.formData = {};
+      }
+    },
+  },
   methods: {
     dialogClose() {
       this.$emit('onDialogClose');
@@ -69,51 +93,10 @@ export default {
       this.$refs.dialogForm.validate((valid) => {
         if (valid) {
           this.$message.success('保存成功');
-          this.$emit('onDialogConfirm');
+          this.$emit('onDialogConfirm', this.formData);
         }
       });
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-.graphCellProperty{
-  width: 300px;
-  height: calc(100% - 42px);
-  position: absolute;
-  right: -1px;
-  top: 40px;
-  background: white;
-  border: 1px solid #EBEBEB;
-  .el-icon-close{
-    position: absolute;
-    right: 15px;
-    top: 12px;
-    cursor: pointer;
-  }
-  .property-header{
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    padding-right: 30px;
-    color: #2D3E53;
-    font-weight: 500;
-    border-bottom: 1px solid #EBEBEB;
-  }
-  .property-content{
-    height: calc(100% - 117px);
-    padding: 20px 20px 0;
-    overflow-y: scroll;
-  }
-  .property-footer{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 56px;
-    border-top: 1px solid #EBEBEB;
-    position: absolute;
-    padding-right: 30px ;
-  }
-}
-</style>

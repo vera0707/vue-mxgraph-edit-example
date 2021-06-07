@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GraphEdit from '@/components/GraphEdit';
+import GraphEdit from '@/components/GraphEdit/index.vue';
 
 export default {
   name: 'HelloWorld',

@@ -7591,7 +7591,6 @@ if (typeof mxVertexHandler != 'undefined')
 			{
 				value.removeAttribute(attributeName);
 			}
-			
 			this.model.setValue(cell, value);
 		};
 		

@@ -400,8 +400,8 @@ Actions.prototype.init = function()
 	// 右键保存数据
 	this.addAction('editData...', function()
 	{
-		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
-		ui.showDataDialog(cell);
+		// var cell = graph.getSelectionCell() || graph.getModel().getRoot();
+		// ui.showDataDialog(cell);
 	}, null, null, Editor.ctrlKey + '+M');
 
 	this.addAction('editTooltip...', function()

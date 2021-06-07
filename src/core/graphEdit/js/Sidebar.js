@@ -12,7 +12,7 @@ function Sidebar(editorUi, container)
 	this.taglist = new Object();
 	this.showTooltips = true;
 	this.graph = editorUi.createTemporaryGraph(this.editorUi.editor.graph.getStylesheet());
-    this.graph.cellRenderer.minSvgStrokeWidth = this.minThumbStrokeWidth;
+  this.graph.cellRenderer.minSvgStrokeWidth = this.minThumbStrokeWidth;
 	this.graph.cellRenderer.antiAlias = this.thumbAntiAlias;
 	this.graph.container.style.visibility = 'hidden';
 	this.graph.foldingEnabled = false;
@@ -335,7 +335,7 @@ Sidebar.prototype.showTooltip = function(elt, cells, w, h, title, showLabel)
 					if (this.tooltipTitle == null)
 					{
 						this.tooltipTitle = document.createElement('div');
-						this.tooltipTitle.style.borderTop = '1px solid gray';
+						this.tooltipTitle.style.borderTop = '1px solid #EBEBEB';
 						this.tooltipTitle.style.textAlign = 'center';
 						this.tooltipTitle.style.width = '100%';
 						this.tooltipTitle.style.overflow = 'hidden';
@@ -1043,12 +1043,12 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 	this.setCurrentSearchEntryLibrary('general', 'general');
 
 	var fns = [
-		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;strokeColor=#455A74', 80, 80, '', '正方形', null, null, 'square'),
-		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;strokeColor=#455A74;strokeWidth=3;', 120, 60, '', '长方形', null, null, 'rect rectangle box'),
-		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#455A74;strokeWidth=3;', 80, 80, '', '圆角矩形', null, null, 'rect rectangle box'),
-		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;strokeColor=#455A74;strokeWidth=3;', 120, 60, '', '圆角长方形', null, null, 'rounded rect rectangle box'),
-		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;strokeColor=#455A74;strokeWidth=3;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
-		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#455A74;strokeWidth=3;', 80, 80, '', '圆形', null, null, 'circle'),
+		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '正方形', null, null, 'square'),
+		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', '长方形', null, null, 'rect rectangle box'),
+		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆角矩形', null, null, 'rect rectangle box'),
+		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 120, 60, '', '圆角长方形', null, null, 'rounded rect rectangle box'),
+		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
+		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆形', null, null, 'circle'),
 
 		// this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', 'Rectangle', null, null, 'rect rectangle box'),
 		// this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 120, 60, '', 'Rounded Rectangle', null, null, 'rounded rect rectangle box'),
@@ -4021,7 +4021,7 @@ Sidebar.prototype.createVertexTemplateEntry = function(style, width, height, val
 	
 	return this.addEntry(tags, mxUtils.bind(this, function()
  	{
- 		return this.createVertexTemplate(style, width, height, value, title, showLabel, showTitle);
+ 		return this.createVertexTemplate(`${style};fill:red;strokeWidth=3;strokeColor=#455A74;`, width, height, value, title, showLabel, showTitle);
  	}));
 }
 
