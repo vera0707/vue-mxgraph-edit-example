@@ -7,8 +7,8 @@
 		<add as="align" value="center"/>
 		<add as="verticalAlign" value="middle"/>
 		<add as="fillColor" value="#ffffff"/>
-		<add as="strokeColor" value="#000000"/>
-		<add as="fontColor" value="#000000"/>
+		<add as="strokeColor" value="#455A74"/>
+		<add as="fontColor" value="#455A74"/>
 	</add>
 	<add as="defaultEdge">
 		<add as="shape" value="connector"/>

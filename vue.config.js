@@ -12,6 +12,7 @@ const venderList = [
   'js/Sidebar.js',
   'js/Graph.js',
   'js/Format.js',
+  'js/Shapes.js',
   'js/Actions.js',
   'js/Menus.js',
   'js/Toolbar.js',

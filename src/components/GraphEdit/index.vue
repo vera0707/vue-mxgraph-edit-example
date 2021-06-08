@@ -127,7 +127,7 @@ export default {
       mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
 
     mxUtils.getAll(
-      [bundle, "./default.xml"],
+      [bundle, "/resources/default.xml"],
       (xhr) => {
         // 加载汉化文件
         mxResources.parse(xhr[0].getText());
@@ -172,8 +172,9 @@ export default {
   }
 }
 .graphEditorContainer {
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 37px);
   position: relative;
+  overflow: hidden;
 }
 </style>

@@ -421,6 +421,7 @@ div.mxWindow .geButton {
 	background-repeat:no-repeat;
 	background-position:50% 50%;
 	border-radius: 8px;
+	margin: 5px 2px;
 }
 .geSidebar .geItem:hover {
 	background-color:#e0e0e0;
