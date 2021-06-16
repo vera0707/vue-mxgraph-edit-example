@@ -1027,6 +1027,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 	this.setCurrentSearchEntryLibrary('general', 'general');
 
 	var fns = [
+		this.createVertexTemplateEntry('text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=center;', 100, 40, 'Text', '文本', null, null, 'Text',false),
 		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '正方形', null, null, 'square'),
 		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆角矩形', null, null, 'rect rectangle box'),
 		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', '长方形', null, null, 'rect rectangle box'),
@@ -1037,24 +1038,32 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
 		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 80, 80, '', '菱形', null, null, 'diamond rhombus if condition decision conditional question test'),
 		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 120, 60, '', '平行四边形'),
-					this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱形', null, null, 'cylinder data database'),
+		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱形', null, null, 'cylinder data database'),
 		this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 50, 50, '', '虚线', null, lineTags + 'dashed undirected no'),
 		this.createEdgeTemplateEntry('endArrow=none;html=1;', 50, 50, '', '实线', null, lineTags + 'simple undirected plain blank no'),
 		this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 50, '', '单箭头线条', null, lineTags + 'directional directed'),
 		this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头线头', null, lineTags + 'bidirectional'),
-		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 50, 50, '', '单箭头', null, lineTags + 'directional directed'),
-		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头', null, lineTags + 'bidirectional'),
+		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 40, 40, '', '单箭头', null, lineTags + 'directional directed'),
+		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 40, 40, '', '双箭头', null, lineTags + 'bidirectional'),
 		this.addEntry('curve', mxUtils.bind(this, function()
 			{
-		 	var cell = new mxCell('', new mxGeometry(0, 0, 50, 50), 'curved=1;endArrow=classic;html=1;');
-		 	cell.geometry.setTerminalPoint(new mxPoint(0, 50), true);
-		 	cell.geometry.setTerminalPoint(new mxPoint(50, 0), false);
-		 	cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+		 	var cell = new mxCell('', new mxGeometry(0, 0, 40, 40), 'curved=1;endArrow=classic;html=1;');
+		 	cell.geometry.setTerminalPoint(new mxPoint(0, 40), true);
+		 	cell.geometry.setTerminalPoint(new mxPoint(40, 0), false);
+		 	cell.geometry.points = [new mxPoint(40, 40), new mxPoint(0, 0)];
 		 	cell.geometry.relative = true;
 		 	cell.edge = true;
 			 
 		     return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
 			})),
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
+
+				 this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud2.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
+				 
+				 this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud3.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云')
 	];
 	
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);
@@ -1157,14 +1166,26 @@ Sidebar.prototype.addUmlPalette = function(expand)
 Sidebar.prototype.addBpmnPalette = function(dir, expand)
 {
 	// Avoids having to bind all functions to "this"
-	var sb = this;
+	const fns = [];
 	this.setCurrentSearchEntryLibrary('bpmn');
 
-	var fns =
-	[
-		this.createVertexTemplateEntry('image;html=1;image=/images/stencils/cloud.svg',
-				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, 'cloud'),
+	const list = [
+		{type: 'operator',title: '操作员'},
+		{type: 'computer',title: '电脑'},
+		{type:'firewall',title: '防护墙'},
+		{type: 'server',title: '服务器'},
+		{type: 'user',title: '用户'},
+		{type: 'client',title: '客户'},
+		{type: 'pad',title: 'pad'},
+		{type: 'phone',title: '手机'},
+		{type: 'customer',title: '客户群'}
 	];
+	list.forEach(item=>{
+		fns.push(
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.type}.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
+		)
+	});
 	
 	this.addPaletteFunctions('bpmn', '其他组件', false, fns);
 	this.setCurrentSearchEntryLibrary();
@@ -2709,13 +2730,13 @@ Sidebar.prototype.addClickHandler = function(elt, ds, cells)
 /**
  * Creates a drop handler for inserting the given cells.
  */
-Sidebar.prototype.createVertexTemplateEntry = function(style, width, height, value, title, showLabel, showTitle, tags)
+Sidebar.prototype.createVertexTemplateEntry = function(style, width, height, value, title, showLabel, showTitle, tags, noDefaultStyle)
 {
 	tags = (tags != null && tags.length > 0) ? tags : ((title != null) ? title.toLowerCase() : '');
 	
 	return this.addEntry(tags, mxUtils.bind(this, function()
  	{
- 		return this.createVertexTemplate(`${style};strokeWidth=3;strokeColor=#455A74;`, width, height, value, title, showLabel, showTitle);
+ 		return this.createVertexTemplate(`${style};strokeWidth=2`, width, height, value, title, showLabel, showTitle);
  	}));
 }
 

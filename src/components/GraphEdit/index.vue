@@ -92,11 +92,11 @@ export default {
     editCell() {
       const graph = this.editorUiInit.editor.graph;
       const cell = graph.getSelectionCell();
+      const value = graph.getModel().getValue(cell);
       if(!cell) {
         this.$message.warning("请先选择组件");
         return;
       }
-      const value = graph.getModel().getValue(cell);
       this.cellProperty = true;
       this.cellData = {cell,value};
     }

@@ -57,8 +57,11 @@
 .geDiagramContainer {
 	background-color:#ffffff;
 	font-size: 12px;
-	/* outline:none; */
-	width: 100%;
+	overflow: auto !important;
+}
+.geDiagramContainer:focus{
+	border: none;
+	outline: none;
 }
 .geMenubar, .geToolbar {
 	white-space:nowrap;

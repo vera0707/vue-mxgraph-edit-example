@@ -1179,13 +1179,14 @@
 				 var pt = mxUtils.convertPoint(this.container, mxEvent.getClientX(evt), mxEvent.getClientY(evt));
 				 
 				 // Asynchronous to avoid direct insert after double tap
-				 window.setTimeout(mxUtils.bind(this, function()
+				  window.setTimeout(mxUtils.bind(this, function()
 				 {
 					 ui.showShapePicker(pt.x, pt.y);
 				 }), 30);
 			 }
 			 else
 			 {
+				console.log(2);
 				 graphDblClick.apply(this, arguments);
 			 }
 		 }

@@ -10402,7 +10402,6 @@ if (typeof mxVertexHandler != 'undefined')
 			{
 				result = 2;
 			}
-			
 			return result;
 		};
 		
