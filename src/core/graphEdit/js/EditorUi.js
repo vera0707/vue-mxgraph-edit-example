@@ -1365,7 +1365,7 @@
 	 });
 	 
 	 return [(cell != null) ? this.editor.graph.cloneCell(cell) :
-			 createVertex('text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;', 40, 20, 'Text'),
+		 createVertex('text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;', 40, 20, 'Text'),
 		 createVertex('whiteSpace=wrap;html=1;'),
 		 createVertex('ellipse;whiteSpace=wrap;html=1;', 120, 80),
 		 createVertex('rhombus;whiteSpace=wrap;html=1;', 80, 80),

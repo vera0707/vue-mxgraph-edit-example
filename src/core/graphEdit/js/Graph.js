@@ -4000,34 +4000,34 @@ HoverIcons.prototype.checkCollisions = true;
 /**
  * Up arrow.
  */
-HoverIcons.prototype.arrowFill = '#29b6f2';
+HoverIcons.prototype.arrowFill = '#169bfa';
 
 /**
  * Up arrow.
  */
 HoverIcons.prototype.triangleUp = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/triangle-up.png', 26, 14) :
-	Graph.createSvgImage(18, 28, '<path d="m 6 26 L 12 26 L 12 12 L 18 12 L 9 1 L 1 12 L 6 12 z" ' +
+	Graph.createSvgImage(16, 24, '<path d="m 6 26 L 12 26 L 12 12 L 18 12 L 9 1 L 1 12 L 6 12 z" ' +
 	'stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '"/>');
 
 /**
  * Right arrow.
  */
 HoverIcons.prototype.triangleRight = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/triangle-right.png', 14, 26) :
-	Graph.createSvgImage(26, 18, '<path d="m 1 6 L 14 6 L 14 1 L 26 9 L 14 18 L 14 12 L 1 12 z" ' +
+	Graph.createSvgImage(24, 16, '<path d="m 1 6 L 14 6 L 14 1 L 26 9 L 14 18 L 14 12 L 1 12 z" ' +
 	'stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '"/>');
 
 /**
  * Down arrow.
  */
 HoverIcons.prototype.triangleDown = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/triangle-down.png', 26, 14) :
-	Graph.createSvgImage(18, 26, '<path d="m 6 1 L 6 14 L 1 14 L 9 26 L 18 14 L 12 14 L 12 1 z" ' +
+	Graph.createSvgImage(16, 24, '<path d="m 6 1 L 6 14 L 1 14 L 9 26 L 18 14 L 12 14 L 12 1 z" ' +
 	'stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '"/>');
 
 /**
  * Left arrow.
  */
 HoverIcons.prototype.triangleLeft = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/triangle-left.png', 14, 26) :
-	Graph.createSvgImage(28, 18, '<path d="m 1 9 L 12 1 L 12 6 L 26 6 L 26 12 L 12 12 L 12 18 z" ' +
+	Graph.createSvgImage(24, 16, '<path d="m 1 9 L 12 1 L 12 6 L 26 6 L 26 12 L 12 12 L 12 18 z" ' +
 	'stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '"/>');
 
 /**
@@ -10922,7 +10922,7 @@ if (typeof mxVertexHandler != 'undefined')
 		 */
 		// TODO: Increase handle padding
 		HoverIcons.prototype.mainHandle = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/handle-main.png', 17, 17) :
-			Graph.createSvgImage(18, 18, '<circle cx="9" cy="9" r="5" stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '" stroke-width="1"/>');
+			Graph.createSvgImage(15, 15, '<circle cx="9" cy="9" r="4" stroke="#fff" fill="' + HoverIcons.prototype.arrowFill + '" stroke-width="1"/>');
 		HoverIcons.prototype.secondaryHandle = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/handle-secondary.png', 17, 17) :
 			Graph.createSvgImage(16, 16, '<path d="m 8 3 L 13 8 L 8 13 L 3 8 z" stroke="#fff" fill="#fca000"/>');
 		HoverIcons.prototype.fixedHandle = (!mxClient.IS_SVG) ? new mxImage(IMAGE_PATH + '/handle-fixed.png', 17, 17) :

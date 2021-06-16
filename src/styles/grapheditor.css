@@ -55,6 +55,7 @@
 	border-color:#dadce0;
 }
 .geDiagramContainer {
+	width: 100%;
 	background-color:#ffffff;
 	font-size: 12px;
 	overflow: auto !important;

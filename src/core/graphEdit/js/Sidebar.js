@@ -86,6 +86,7 @@ Sidebar.prototype.init = function()
 	this.addGeneralPalette(true);
 	// 核心网
 	this.addMiscPalette(false);
+	// 传输网
 	this.addAdvancedPalette(false);
 
 	// IP网
@@ -1056,6 +1057,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 			 
 		     return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
 			})),
+			this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 120, 80,'','云',null,'cloud'),
 			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
 				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
 
@@ -1076,7 +1078,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 Sidebar.prototype.addMiscPalette = function(expand)
 {
 	this.setCurrentSearchEntryLibrary('general', 'misc');
-	var fns = [];
+	const fns = [];
 	
 	const neType = ['AMF','AUSF','HSS','MME','NEF','NRF','NSSF','PCF','PCRF','PGW','SGW','SMF','UDM','UPF'];
 	neType.forEach(type=>{
@@ -1094,7 +1096,16 @@ Sidebar.prototype.addMiscPalette = function(expand)
 Sidebar.prototype.addAdvancedPalette = function(expand)
 {
 	this.setCurrentSearchEntryLibrary('general', 'advanced');
-	this.addPaletteFunctions('advanced', mxResources.get('advanced'), (expand != null) ? expand : false, this.createAdvancedShapes());
+	const fns = [];
+	const list = ['SDH','PON','PTN','OTN','IPRAN','SPN'];
+	list.forEach(type=>{
+		fns.push(
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', type, true, null, type)
+		)
+	});
+
+	this.addPaletteFunctions('advanced', mxResources.get('advanced'), (expand != null) ? expand : false, fns);
 	this.setCurrentSearchEntryLibrary();
 };
 
@@ -1120,13 +1131,6 @@ Sidebar.prototype.addBasicPalette = function(dir)
  */
 Sidebar.prototype.createAdvancedShapes = function()
 {
-	// Avoids having to bind all functions to "this"
-	// var sb = this;
-
-	// Reusable cells
-	// var field = new mxCell('List Item', new mxGeometry(0, 0, 60, 26), 'text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
-	// field.vertex = true;
-
 	return [
 	 	this.createVertexTemplateEntry('shape=tapeData;whiteSpace=wrap;html=1;perimeter=ellipsePerimeter;', 80, 80, '', 'Tape Data'),
 	 	this.createVertexTemplateEntry('shape=manualInput;whiteSpace=wrap;html=1;', 80, 80, '', 'Manual Input'),
@@ -1138,16 +1142,6 @@ Sidebar.prototype.createAdvancedShapes = function()
  */
 Sidebar.prototype.addUmlPalette = function(expand)
 {
-	// Avoids having to bind all functions to "this"
-	var sb = this;
-
-	// Reusable cells
-	// var field = new mxCell('+ field: type', new mxGeometry(0, 0, 100, 26), 'text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
-	// field.vertex = true;
-
-	// var divider = new mxCell('', new mxGeometry(0, 0, 40, 8), 'line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;');
-	// divider.vertex = true;
-	
 	// Default tags
 	var dt = 'uml static class ';
 	this.setCurrentSearchEntryLibrary('uml');
@@ -1178,7 +1172,10 @@ Sidebar.prototype.addBpmnPalette = function(dir, expand)
 		{type: 'client',title: '客户'},
 		{type: 'pad',title: 'pad'},
 		{type: 'phone',title: '手机'},
-		{type: 'customer',title: '客户群'}
+		{type: 'lightning',title: '闪电'},
+		{type: 'customer',title: '客户群'},
+		{type: 'router',title: '路由'},
+		{type: 'switch',title: '交换机'},
 	];
 	list.forEach(item=>{
 		fns.push(
