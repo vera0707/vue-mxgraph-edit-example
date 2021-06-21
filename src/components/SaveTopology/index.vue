@@ -44,7 +44,6 @@ export default {
   name: 'saveEdit',
   props: {
     isVisible: Boolean || false,
-    detailData: Object || {},
   },
   data() {
     return {
@@ -67,7 +66,7 @@ export default {
       this.$refs.dialogForm.validate((valid) => {
         if (valid) {
           this.$message.success('保存成功');
-          this.$emit('onDialogConfirm');
+          this.$emit('onDialogConfirm', this.formData);
         }
       });
     },

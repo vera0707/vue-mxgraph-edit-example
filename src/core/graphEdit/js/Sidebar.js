@@ -1043,6 +1043,8 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 80, 80, '', '菱形', null, null, 'diamond rhombus if condition decision conditional question test'),
 		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 120, 60, '', '平行四边形'),
 		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱形', null, null, 'cylinder data database'),
+		this.createVertexTemplateEntry('html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;', 90, 100, '', '立方体', true, null, 'cube box iso isometric'),
+
 
 		this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 120, 80,'','云',null,'cloud'),
 		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
@@ -1054,17 +1056,6 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud3.svg`,
 				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
 
-		this.addEntry('curve', mxUtils.bind(this, function()
-				 {
-					var cell = new mxCell('', new mxGeometry(0, 0, 50, 50), 'curved=1;endArrow=classic;html=1;');
-					cell.geometry.setTerminalPoint(new mxPoint(0, 50), true);
-					cell.geometry.setTerminalPoint(new mxPoint(50, 0), false);
-					cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
-					cell.geometry.relative = true;
-					cell.edge = true;
-					
-						return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
-				 })),
 				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头', null, lineTags + 'bidirectional'),
 				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 50, 50, '', '单箭头', null, lineTags + 'directional directed'),
 				 this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 50, 50, '', '虚线', null, lineTags + 'dashed undirected no'),
@@ -1072,6 +1063,30 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 				 this.createEdgeTemplateEntry('endArrow=none;html=1;', 50, 50, '', '实线', null, lineTags + 'simple undirected plain blank no'),
 				 this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头实线', null, lineTags + 'bidirectional'),
 				 this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 50, '', '单箭头实线', null, lineTags + 'directional directed'),		 
+
+				this.addEntry('curve', mxUtils.bind(this, function()
+				{
+				 var cell = new mxCell('', new mxGeometry(0, 0, 50, 50), 'curved=1;endArrow=classic;html=1;');
+				 cell.geometry.setTerminalPoint(new mxPoint(0, 50), true);
+				 cell.geometry.setTerminalPoint(new mxPoint(50, 0), false);
+				 cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+				 cell.geometry.relative = true;
+				 cell.edge = true;
+				 
+					 return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
+				})), 
+				 this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;', 50, 100, '', '曲线'),
+				 this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;elbow=vertical;', 50, 100, '', '曲线'),
+				 this.createVertexTemplateEntry('shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;', 20, 120, '', '花括号'),
+				 this.createVertexTemplateEntry('line;strokeWidth=2;html=1;', 160, 10, '', '横线'),
+				 this.createVertexTemplateEntry('line;strokeWidth=2;direction=south;html=1;', 10, 160, '', '竖线'),
+				 this.createVertexTemplateEntry('shape=crossbar;whiteSpace=wrap;html=1;rounded=1;', 120, 20, '', '横杆', false, null, 'crossbar distance measure dimension unit'),
+				 this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;', 120, 60, '', '部分矩形'),
+				 this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;', 120, 60, '', '部分矩形'),
+				 this.createEdgeTemplateEntry('edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;', 50, 50, '', '折线', null, lineTags + 'manual'),
+				 this.createEdgeTemplateEntry('shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=10;fillColor=#ffffff;edgeStyle=orthogonalEdgeStyle;', 60, 40, '', '水平折线'),
+				 this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;', 50, 50, '', '竖直折线', null, lineTags + 'elbow horizontal'),
+				 this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=vertical;endArrow=classic;html=1;', 50, 50, '', '折线', null, lineTags + 'elbow vertical')	
 	];
 	
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);

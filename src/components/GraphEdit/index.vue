@@ -9,11 +9,15 @@
         <img src="~@/assets/add.svg" width="10" alt="" />
         新增
       </div>
-      <div class="legendItem" @click="saveTopo">
+      <div class="legendItem" @click="saveCurrentTopo = true">
         <img src="~@/assets/save.svg" width="10" alt="" />
         保存
       </div>
-      <div class="legendItem" @click="editCell">
+      <div class="legendItem" @click="openNewTopo">
+        <i class="el-icon-folder-opened"></i>
+        打开
+      </div>
+      <div class="legendItem" @click="openEditCellDialog">
         <i class="el-icon-edit"></i>
         编辑数据
       </div>
@@ -36,12 +40,10 @@
     />
     <SaveTopology
       :isVisible="saveCurrentTopo"
-      :detailData="topoData"
       v-on:onDialogClose="
         saveCurrentTopo = false;
-        topoData = {};
       "
-      v-on:onDialogConfirm="saveActiveCell"
+      v-on:onDialogConfirm="saveTopology"
     />
   </div>
 </template>
@@ -62,7 +64,6 @@ export default {
       editorUiInit: false,
       topoVal: "",
       saveCurrentTopo: false,
-      topoData: {},
       cellProperty: false,
       cellData: {},
     };
@@ -72,11 +73,20 @@ export default {
       this.editorUiInit.actions.get("outline").funct();
       this.editorUiInit.refresh();
     },
-    saveTopo() {
-      var encoder = new mxCodec();
-      // 获取图的XML格式代码片段
-      this.topoData = encoder.encode(this.editorUiInit.editor.graph.getModel());
-      this.saveCurrentTopo = true;
+    downloadFile(filename, text){
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:application/xml;charset=utf-8,' + text);
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+    saveTopology({name}){
+      const graphXml = this.editorUiInit.editor.getGraphXml();
+      const xmlObject = (new XMLSerializer()).serializeToString(graphXml);
+      this.downloadFile(`${name}.xml`,xmlObject)
+      this.saveCurrentTopo = false;
     },
     saveActiveCell(cellProperty) {
       const { cell} = this.cellData;
@@ -89,7 +99,7 @@ export default {
       this.cellProperty = false;
       this.cellData = {};
     },
-    editCell() {
+    openEditCellDialog() {
       const graph = this.editorUiInit.editor.graph;
       const cell = graph.getSelectionCell();
       const value = graph.getModel().getValue(cell);
@@ -111,9 +121,9 @@ export default {
       editorUiInit.apply(this, arguments);
       this.actions.get("export").setEnabled(false);
       this.actions.addAction(
-        "editData...",
+        "editData",
         function () {
-          self.editCell();
+          self.openEditCellDialog();
         },
         null,
         null,
