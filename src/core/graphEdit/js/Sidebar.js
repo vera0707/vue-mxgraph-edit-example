@@ -143,12 +143,12 @@ Sidebar.prototype.gearImage = STENCIL_PATH + '/clipart/Gear_128x128.png';
 /**
  * Specifies the width of the thumbnails.
  */
-Sidebar.prototype.thumbWidth = 38;
+Sidebar.prototype.thumbWidth = 26;
 
 /**
  * Specifies the height of the thumbnails.
  */
-Sidebar.prototype.thumbHeight = 36;
+Sidebar.prototype.thumbHeight = 26;
 
 /**
  * Specifies the width of the thumbnails.
@@ -177,8 +177,8 @@ if (urlParams['sidebar-entries'] != 'large')
 {
 	Sidebar.prototype.thumbPadding = (document.documentMode >= 5) ? 0 : 1;
 	Sidebar.prototype.thumbBorder = 1;
-	Sidebar.prototype.thumbWidth = 38;
-	Sidebar.prototype.thumbHeight = 36;
+	Sidebar.prototype.thumbWidth = 26;
+	Sidebar.prototype.thumbHeight = 26;
 	Sidebar.prototype.minThumbStrokeWidth = 1.3;
 	Sidebar.prototype.thumbAntiAlias = true;
 }
@@ -1029,6 +1029,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 
 	var fns = [
 		this.createVertexTemplateEntry('text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=center;', 100, 40, 'Text', '文本', null, null, 'Text',false),
+		this.createVertexTemplateEntry('html=1;', 110, 50, 'Text', '带框文本', null, null, 'Text'),
 		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '正方形', null, null, 'square'),
 		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆角矩形', null, null, 'rect rectangle box'),
 		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', '长方形', null, null, 'rect rectangle box'),
@@ -1036,36 +1037,41 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		
 		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆形', null, null, 'circle'),
 		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;', 120, 80, '', '椭圆', null, null, 'oval ellipse state'),
+	
+
 		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
 		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 80, 80, '', '菱形', null, null, 'diamond rhombus if condition decision conditional question test'),
 		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 120, 60, '', '平行四边形'),
 		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱形', null, null, 'cylinder data database'),
-		this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 50, 50, '', '虚线', null, lineTags + 'dashed undirected no'),
-		this.createEdgeTemplateEntry('endArrow=none;html=1;', 50, 50, '', '实线', null, lineTags + 'simple undirected plain blank no'),
-		this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 50, '', '单箭头线条', null, lineTags + 'directional directed'),
-		this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头线头', null, lineTags + 'bidirectional'),
-		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 40, 40, '', '单箭头', null, lineTags + 'directional directed'),
-		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 40, 40, '', '双箭头', null, lineTags + 'bidirectional'),
-		this.addEntry('curve', mxUtils.bind(this, function()
-			{
-		 	var cell = new mxCell('', new mxGeometry(0, 0, 40, 40), 'curved=1;endArrow=classic;html=1;');
-		 	cell.geometry.setTerminalPoint(new mxPoint(0, 40), true);
-		 	cell.geometry.setTerminalPoint(new mxPoint(40, 0), false);
-		 	cell.geometry.points = [new mxPoint(40, 40), new mxPoint(0, 0)];
-		 	cell.geometry.relative = true;
-		 	cell.edge = true;
-			 
-		     return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
-			})),
-			this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 120, 80,'','云',null,'cloud'),
-			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
+
+		this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 120, 80,'','云',null,'cloud'),
+		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
 				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
 
-				 this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud2.svg`,
+		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud2.svg`,
 				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
 				 
-				 this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud3.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云')
+		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud3.svg`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
+
+		this.addEntry('curve', mxUtils.bind(this, function()
+				 {
+					var cell = new mxCell('', new mxGeometry(0, 0, 50, 50), 'curved=1;endArrow=classic;html=1;');
+					cell.geometry.setTerminalPoint(new mxPoint(0, 50), true);
+					cell.geometry.setTerminalPoint(new mxPoint(50, 0), false);
+					cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+					cell.geometry.relative = true;
+					cell.edge = true;
+					
+						return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
+				 })),
+				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头', null, lineTags + 'bidirectional'),
+				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 50, 50, '', '单箭头', null, lineTags + 'directional directed'),
+				 this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 50, 50, '', '虚线', null, lineTags + 'dashed undirected no'),
+				 this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;', 50, 50, '', '虚线', null, lineTags + 'dotted undirected no'),
+				 this.createEdgeTemplateEntry('endArrow=none;html=1;', 50, 50, '', '实线', null, lineTags + 'simple undirected plain blank no'),
+				 this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头实线', null, lineTags + 'bidirectional'),
+				 this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 50, '', '单箭头实线', null, lineTags + 'directional directed'),		 
 	];
 	
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);
