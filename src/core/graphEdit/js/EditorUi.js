@@ -3139,14 +3139,17 @@
 	 }
 	 else if (!this.editor.isChromelessView())
 	 {
+		console.log('2');
 		 if (mxUtils.hasScrollbars(graph.container))
 		 {
 			 if (graph.pageVisible)
 			 {
 				 var pad = graph.getPagePadding();
-				 graph.container.scrollTop = Math.floor(pad.y - this.editor.initialTopSpacing) - 1;
-				 graph.container.scrollLeft = Math.floor(Math.min(pad.x,
-					 (graph.container.scrollWidth - graph.container.clientWidth) / 2)) - 1;
+				 graph.container.scrollTop = 0;
+				 graph.container.scrollLeft = 0;
+				//  graph.container.scrollTop = Math.floor(pad.y - this.editor.initialTopSpacing) - 1;
+				//  graph.container.scrollLeft = Math.floor(Math.min(pad.x,
+				// 	 (graph.container.scrollWidth - graph.container.clientWidth) / 2)) - 1;
  
 				 // Scrolls graph to visible area
 				 var bounds = graph.getGraphBounds();
@@ -3166,6 +3169,7 @@
 			 }
 			 else
 			 {
+				console.log('3');
 				 var bounds = graph.getGraphBounds();
 				 var width = Math.max(bounds.width, graph.scrollTileSize.width * graph.view.scale);
 				 var height = Math.max(bounds.height, graph.scrollTileSize.height * graph.view.scale);

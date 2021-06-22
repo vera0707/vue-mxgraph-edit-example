@@ -25,8 +25,9 @@
     <div ref="graphContainer"></div>
   </div>
 </template>
-
 <script>
+import '@/styles/grapheditor.css';
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -35,10 +36,33 @@ export default {
       graph: null,
     };
   },
-  components: {},
   mounted() {
-    this.graph = new window.mxGraph(this.$refs.graphContainer);
+    const $Message = this.$message;
+    const container = this.$refs.graphContainer;
+
+    mxResources.loadDefaultBundle = false;
+    const bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage)
+      || mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+    mxUtils.getAll(
+      [bundle, '/resources/default.xml'],
+      (xhr) => {
+        // 加载汉化文件
+        mxResources.parse(xhr[0].getText());
+        const themes = {};
+        themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+        this.editorUiInit = new EditorUi(
+          new Editor(urlParams.chrome == '0', themes),
+          container,
+        );
+      },
+      () => {
+        $Message.error('当前浏览器不支持');
+      },
+    );
   },
+
   methods: {
     onUploadChange(file) {
       if (file.status === 'ready') return;
@@ -46,11 +70,16 @@ export default {
         const reader = new FileReader();
         reader.readAsText(file.raw);
         reader.onload = () => {
+          this.openEdit(reader.result);
           // this.parsmXml(reader.result);
-          this.test(reader.result);
+          // this.test(reader.result);
         };
         this.dialogVisible = false;
       } else this.$message.error('文件解析失败');
+    },
+    openEdit(xml){
+      const doc = window.mxUtils.parseXml(xml);
+      this.editorUiInit.editor.graph.setSelectionCells(this.editorUiInit.editor.graph.importGraphModel(doc.documentElement));
     },
     test(xml) {
       const doc = window.mxUtils.parseXml(xml);
@@ -119,5 +148,34 @@ export default {
   width: 100%;
   height: calc(100vh - 30px);
   border: 1px solid red;
+}
+.editMainContainer {
+  position: relative;
+
+  .editLegendHeader {
+    position: absolute;
+    top: 0;
+    left: 350px;
+    z-index: 10;
+    font-size: 12px;
+    height: 40px;
+    display: flex;
+    color: #2d3e53;
+    align-items: center;
+    .legendItem {
+      cursor: pointer;
+      margin-right: 15px;
+
+      &.disable{
+        opacity: 0.2;
+      }
+    }
+  }
+}
+.graphEditorContainer {
+  width: 100%;
+  height: calc(100vh - 37px);
+  position: relative;
+  overflow: hidden;
 }
 </style>

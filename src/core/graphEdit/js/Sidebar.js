@@ -2804,7 +2804,7 @@ Sidebar.prototype.createEdgeTemplateEntry = function(style, width, height, value
 	
  	return this.addEntry(tags, mxUtils.bind(this, function()
  	{
- 		return this.createEdgeTemplate(`${style};strokeWidth=2;strokeColor=#455A74;`, width, height, value, title, showLabel, allowCellsInserted);
+ 		return this.createEdgeTemplate(style, width, height, value, title, showLabel, allowCellsInserted);
  	}));
 };
 

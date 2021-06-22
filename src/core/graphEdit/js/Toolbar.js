@@ -1043,11 +1043,13 @@
 		 var graph = this.editorUi.editor.graph;
 		 var menu = null;
 		 var show = true;
-		 var $editLegendHeader = document.getElementsByClassName('editLegendHeader');
-
-		if(showLabels) $editLegendHeader[0].style.left = '405px';
-		else $editLegendHeader[0].style.left = '640px';
- 
+		 var $editLegendHeader = document.getElementsByClassName('editLegendHeader')[0];
+		
+		 if($editLegendHeader) {
+			if(showLabels) $editLegendHeader.style.left = '405px'
+			else $editLegendHeader.style.left = '640px';
+		 }
+		 
 		 mxEvent.addListener(elt, 'click', mxUtils.bind(this, function(evt)
 		 {
 			 if (show && (elt.enabled == null || elt.enabled))

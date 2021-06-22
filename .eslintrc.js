@@ -16,6 +16,7 @@ module.exports = {
   },
   ignorePatterns: [
     '/src/core/graphEdit/*',
-    'src/components/GraphEdit/*'
+    'src/components/GraphEdit/*',
+    'src/views/Open.vue',
   ]
 };

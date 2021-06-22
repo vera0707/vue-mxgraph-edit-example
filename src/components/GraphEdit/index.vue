@@ -11,11 +11,11 @@
       </div>
       <div class="legendItem" @click="saveCurrentTopo = true">
         <img src="~@/assets/save.svg" width="10" alt="" />
-        保存
+        导出
       </div>
-      <div class="legendItem" @click="openNewTopo">
+      <div class="legendItem" @click="importFile = true">
         <i class="el-icon-folder-opened"></i>
-        打开
+        导入
       </div>
       <div class="legendItem" @click="openEditCellDialog">
         <i class="el-icon-edit"></i>
@@ -43,13 +43,22 @@
       v-on:onDialogClose="
         saveCurrentTopo = false;
       "
-      v-on:onDialogConfirm="saveTopology"
+      v-on:onDialogConfirm="exportTopology"
+    />
+    <ImportFile
+      :isVisible="importFile"
+      v-on:onDialogClose="
+        importFile = false;
+      "
+      v-on:onDialogConfirm="parseXmlFile"
     />
   </div>
 </template>
 <script>
 import SaveTopology from "@/components/SaveTopology";
 import EditCellProperty from "@/components/EditCellProperty";
+import ImportFile from '@/components/ImportFile';
+
 
 import "@/styles/grapheditor.css";
 export default {
@@ -57,14 +66,15 @@ export default {
   components: {
     SaveTopology,
     EditCellProperty,
+    ImportFile,
   },
   data() {
     return {
       graph: null,
-      editorUiInit: false,
       topoVal: "",
       saveCurrentTopo: false,
       cellProperty: false,
+      importFile: false,
       cellData: {},
     };
   },
@@ -82,7 +92,7 @@ export default {
       element.click();
       document.body.removeChild(element);
     },
-    saveTopology({name}){
+    exportTopology({name}){
       const graphXml = this.editorUiInit.editor.getGraphXml();
       const xmlObject = (new XMLSerializer()).serializeToString(graphXml);
       this.downloadFile(`${name}.xml`,xmlObject)
@@ -109,7 +119,12 @@ export default {
       }
       this.cellProperty = true;
       this.cellData = {cell,value};
-    }
+    },
+    parseXmlFile(xml){
+      const doc = window.mxUtils.parseXml(xml);
+      this.editorUiInit.editor.graph.setSelectionCells(this.editorUiInit.editor.graph.importGraphModel(doc.documentElement));
+      this.importFile = false;
+    },
   },
   mounted() {
     const self = this;

@@ -69,6 +69,7 @@ Actions.prototype.init = function()
 	this.addAction('editDiagram...', function()
 	{
 		var dlg = new EditDiagramDialog(ui);
+		console.log(dlg);
 		ui.showDialog(dlg.container, 620, 420, true, false);
 		dlg.init();
 	});
@@ -204,7 +205,6 @@ Actions.prototype.init = function()
 		// Cancels interactive operations
 		graph.escape();
 		var select = graph.deleteCells(graph.getDeletableCells(graph.getSelectionCells()), includeEdges);
-		
 		if (select != null)
 		{
 			graph.setSelectionCells(select);
