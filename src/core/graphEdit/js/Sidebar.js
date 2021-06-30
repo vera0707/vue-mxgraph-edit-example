@@ -1118,7 +1118,7 @@ Sidebar.prototype.addAdvancedPalette = function(expand)
 {
 	this.setCurrentSearchEntryLibrary('general', 'advanced');
 	const fns = [];
-	const list = ['SDH','PON','PTN','OTN','IPRAN','SPN'];
+	const list = ['SDH','PON','PTN','OTN','IPRAN','SPN','ODN','OLT','ONT','ONU'];
 	list.forEach(type=>{
 		fns.push(
 			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.svg`,

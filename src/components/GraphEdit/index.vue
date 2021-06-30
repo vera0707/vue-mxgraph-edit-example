@@ -2,7 +2,7 @@
   <div class="editMainContainer">
     <div class="editLegendHeader">
       <div @click="handleThumbnail" class="legendItem">
-        <i class="el-icon-coordinate"></i>
+        <img src="~@/assets/coordinate.svg" width="10" alt="" />
         缩略图
       </div>
       <div class="legendItem">
@@ -18,15 +18,15 @@
         导入
       </div>
       <div class="legendItem" @click="openEditCellDialog">
-        <i class="el-icon-edit"></i>
+        <img src="~@/assets/edit.svg" width="10" alt="" />
         编辑数据
       </div>
-      <div class="legendItem">
-        <span style="margin-right: 10px">拓扑选择</span>
-        <el-select v-model="topoVal" placeholder="请选择" clearable size="mini">
-          <el-option label="test" value="test">test</el-option>
-        </el-select>
+      <div class="legendItem" style="margin-right: 5px">
+        拓扑选择
       </div>
+      <el-select v-model="topoVal" placeholder="请选择" clearable size="mini">
+        <el-option label="test" value="test">test</el-option>
+      </el-select>
     </div>
     <div class="graphEditorContainer" ref="editorContainer"></div>
     <EditCellProperty
@@ -40,16 +40,12 @@
     />
     <SaveTopology
       :isVisible="saveCurrentTopo"
-      v-on:onDialogClose="
-        saveCurrentTopo = false;
-      "
+      v-on:onDialogClose="saveCurrentTopo = false"
       v-on:onDialogConfirm="exportTopology"
     />
     <ImportFile
       :isVisible="importFile"
-      v-on:onDialogClose="
-        importFile = false;
-      "
+      v-on:onDialogClose="importFile = false"
       v-on:onDialogConfirm="parseXmlFile"
     />
   </div>
@@ -57,8 +53,7 @@
 <script>
 import SaveTopology from "@/components/SaveTopology";
 import EditCellProperty from "@/components/EditCellProperty";
-import ImportFile from '@/components/ImportFile';
-
+import ImportFile from "@/components/ImportFile";
 
 import "@/styles/grapheditor.css";
 export default {
@@ -83,28 +78,31 @@ export default {
       this.editorUiInit.actions.get("outline").funct();
       this.editorUiInit.refresh();
     },
-    downloadFile(filename, text){
-      const element = document.createElement('a');
-      element.setAttribute('href', 'data:application/xml;charset=utf-8,' + text);
-      element.setAttribute('download', filename);
-      element.style.display = 'none';
+    downloadFile(filename, text) {
+      const element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:application/xml;charset=utf-8," + text
+      );
+      element.setAttribute("download", filename);
+      element.style.display = "none";
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
     },
-    exportTopology({name}){
+    exportTopology({ name }) {
       const graphXml = this.editorUiInit.editor.getGraphXml();
-      const xmlObject = (new XMLSerializer()).serializeToString(graphXml);
-      this.downloadFile(`${name}.xml`,xmlObject)
+      const xmlObject = new XMLSerializer().serializeToString(graphXml);
+      this.downloadFile(`${name}.xml`, xmlObject);
       this.saveCurrentTopo = false;
     },
     saveActiveCell(cellProperty) {
-      const { cell} = this.cellData;
+      const { cell } = this.cellData;
       var doc = mxUtils.createXmlDocument();
-      var obj = doc.createElement('object');
-      Object.keys(cellProperty).forEach(v=>{
-        obj.setAttribute(v,cellProperty[v]);
-      })
+      var obj = doc.createElement("object");
+      Object.keys(cellProperty).forEach((v) => {
+        obj.setAttribute(v, cellProperty[v]);
+      });
       this.editorUiInit.editor.graph.getModel().setValue(cell, obj);
       this.cellProperty = false;
       this.cellData = {};
@@ -113,16 +111,18 @@ export default {
       const graph = this.editorUiInit.editor.graph;
       const cell = graph.getSelectionCell();
       const value = graph.getModel().getValue(cell);
-      if(!cell) {
+      if (!cell) {
         this.$message.warning("请先选择组件");
         return;
       }
       this.cellProperty = true;
-      this.cellData = {cell,value};
+      this.cellData = { cell, value };
     },
-    parseXmlFile(xml){
+    parseXmlFile(xml) {
       const doc = window.mxUtils.parseXml(xml);
-      this.editorUiInit.editor.graph.setSelectionCells(this.editorUiInit.editor.graph.importGraphModel(doc.documentElement));
+      this.editorUiInit.editor.graph.setSelectionCells(
+        this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
+      );
       this.importFile = false;
     },
   },
@@ -188,9 +188,10 @@ export default {
     align-items: center;
     .legendItem {
       cursor: pointer;
+      font-size: 12px;
       margin-right: 15px;
 
-      &.disable{
+      &.disable {
         opacity: 0.2;
       }
     }
@@ -201,5 +202,6 @@ export default {
   height: calc(100vh - 37px);
   position: relative;
   overflow: hidden;
+  
 }
 </style>

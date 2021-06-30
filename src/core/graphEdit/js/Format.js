@@ -373,20 +373,20 @@
 	 
 	 var div = document.createElement('div');
 	 div.style.whiteSpace = 'nowrap';
-	 div.style.color = 'rgb(112, 112, 112)';
+	 div.style.color = '#2D3E53';
 	 div.style.textAlign = 'left';
 	 div.style.cursor = 'default';
 	 
 	 var label = document.createElement('div');
 	 label.className = 'geFormatSection';
 	 label.style.textAlign = 'center';
-	 label.style.fontWeight = 'bold';
-	 label.style.paddingTop = '8px';
-	 label.style.fontSize = '13px';
+	//  label.style.fontWeight = 'bold';
+	 label.style.fontSize = '12px';
 	 label.style.borderWidth = '0px 0px 1px 1px';
 	 label.style.borderStyle = 'solid';
 	 label.style.display = (mxClient.IS_QUIRKS) ? 'inline' : 'inline-block';
-	 label.style.height = (mxClient.IS_QUIRKS) ? '34px' : '25px';
+	 label.style.height = '40px';
+	 label.style.lineHeight = '40px';
 	 label.style.overflow = 'hidden';
 	 label.style.width = '100%';
 	 this.container.appendChild(div);
@@ -503,10 +503,10 @@
 		 if (this.showCloseButton)
 		 {
 			 var label2 = label.cloneNode(false);
-			 label2.style.borderLeftWidth = '1px';
-			 label2.style.borderRightWidth = '1px';
-			 label2.style.borderBottomWidth = '1px';
-			 label2.style.backgroundColor = this.inactiveTabBackgroundColor;
+			//  label2.style.borderLeftWidth = '1px';
+			//  label2.style.borderRightWidth = '1px';
+			//  label2.style.borderBottomWidth = '1px';
+			//  label2.style.backgroundColor = this.inactiveTabBackgroundColor;
 			 label2.style.position = 'absolute';
 			 label2.style.right = '0px';
 			 label2.style.top = '0px';
@@ -519,9 +519,9 @@
 			 img.style.position = 'absolute';
 			 img.style.display = 'block';
 			 img.style.right = '0px';
-			 img.style.top = '8px';
+			 img.style.top = '14px';
 			 img.style.cursor = 'pointer';
-			 img.style.marginTop = '1px';
+			//  img.style.marginTop = '1px';
 			 img.style.marginRight = '6px';
 			 img.style.border = '1px solid transparent';
 			 img.style.padding = '1px';
@@ -791,7 +791,7 @@
 	 div.style.whiteSpace = 'nowrap';
 	 div.style.overflow = 'hidden';
 	 div.style.width = '200px';
-	 div.style.fontWeight = 'bold';
+	 div.style.fontWeight = 'normal';
 	 mxUtils.write(div, title);
 	 
 	 return div;
@@ -929,7 +929,7 @@
 	 div.style.padding = '6px 0px 1px 0px';
 	 div.style.whiteSpace = 'nowrap';
 	 div.style.overflow = 'hidden';
-	 div.style.width = '200px';
+	 div.style.width = '300px';
 	 div.style.height = (mxClient.IS_QUIRKS) ? '27px' : '18px';
 	 
 	 var cb = document.createElement('input');
@@ -1218,8 +1218,8 @@
 		 listener.install(apply);
 		 this.listeners.push(listener);
 	 }
-	 
-	 return div;
+
+	return div;
  };
  
  /**
@@ -1330,10 +1330,11 @@
 	 }
  
 	 mxUtils.setOpacity(elt, 100);
-	 elt.style.border = '1px solid #a0a0a0';
+	 elt.style.border = '1px solid #E0E0E0';
 	 elt.style.backgroundColor = this.buttonBackgroundColor;
 	 elt.style.backgroundImage = 'none';
 	 elt.style.width = 'auto';
+	 elt.style.padding = '0 0 4px';
 	 elt.className += ' geColorBtn';
 	 mxUtils.setPrefixedStyle(elt.style, 'borderRadius', '3px');
 	 
@@ -1377,7 +1378,7 @@
 	 div.style.paddingTop = '10px';
 	 div.style.paddingBottom = '10px';
 	 mxUtils.write(div, label);
-	 div.style.fontWeight = 'bold';
+	//  div.style.fontWeight = 'bold';
 	 
 	 var update = mxUtils.bind(this, function(evt)
 	 {
@@ -1506,7 +1507,7 @@
 	 {
 		 mxUtils.setPrefixedStyle(elts[i].style, 'borderRadius', '3px');
 		 mxUtils.setOpacity(elts[i], 100);
-		 elts[i].style.border = '1px solid #a0a0a0';
+		 elts[i].style.border = '1px solid #E0E0E0';
 		 elts[i].style.padding = '4px';
 		 elts[i].style.paddingTop = '3px';
 		 elts[i].style.paddingRight = '1px';
@@ -1590,7 +1591,7 @@
 		 var span = document.createElement('div');
 		 span.style.width = '100%';
 		 span.style.marginTop = '0px';
-		 span.style.fontWeight = 'bold';
+		//  span.style.fontWeight = 'bold';
 		 span.style.padding = '10px 0 0 18px';
 		 mxUtils.write(span, mxResources.get('style'));
 		 this.container.appendChild(span);
@@ -1614,7 +1615,7 @@
 	 var span = document.createElement('div');
 	 span.style.marginTop = '2px';
 	 span.style.marginBottom = '8px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('table'));
 	 div.appendChild(span);
 	 
@@ -1952,7 +1953,7 @@
 	 var span = document.createElement('div');
 	 span.style.marginTop = '2px';
 	 span.style.marginBottom = '8px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('flip'));
 	 div.appendChild(span);
 	 
@@ -2029,7 +2030,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 
 	 var input = null;
 	 var update = null;
@@ -2176,7 +2177,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '50px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('size'));
 	 div.appendChild(span);
  
@@ -2313,7 +2314,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('position'));
 	 div2.appendChild(span);
 	 
@@ -2569,7 +2570,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('width'));
 	 div.appendChild(span);
  
@@ -2611,7 +2612,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, 'Start');
 	 divs.appendChild(span);
  
@@ -2638,7 +2639,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, 'End');
 	 divt.appendChild(span);
  
@@ -2790,7 +2791,7 @@
 		 
 		 var cssMenu = this.editorUi.toolbar.addMenu(mxResources.get('style'),
 			 mxResources.get('style'), true, 'formatBlock', cssPanel, null, true);
-		 cssMenu.style.color = 'rgb(112, 112, 112)';
+		 cssMenu.style.color = '#455A74';
 		 cssMenu.style.whiteSpace = 'nowrap';
 		 cssMenu.style.overflow = 'hidden';
 		 cssMenu.style.margin = '0px';
@@ -2811,9 +2812,9 @@
 	 colorPanel.style.paddingTop = '6px';
 	 colorPanel.style.paddingBottom = '6px';
 	 
-	 var fontMenu = this.editorUi.toolbar.addMenu('Helvetica', mxResources.get('fontFamily'),
+	 var fontMenu = this.editorUi.toolbar.addMenu('Arial', mxResources.get('fontFamily'),
 		 true, 'fontFamily', stylePanel, null, true);
-	 fontMenu.style.color = 'rgb(112, 112, 112)';
+	 fontMenu.style.color = '#455A74';
 	 fontMenu.style.whiteSpace = 'nowrap';
 	 fontMenu.style.overflow = 'hidden';
 	 fontMenu.style.margin = '0px';
@@ -3292,10 +3293,10 @@
 			 elt.style.backgroundColor = null;
 		 });
 	 });
-	 bgPanel.style.fontWeight = 'bold';
+	//  bgPanel.style.fontWeight = 'bold';
  
 	 var borderPanel = this.createCellColorOption(mxResources.get('borderColor'), mxConstants.STYLE_LABEL_BORDERCOLOR, '#000000');
-	 borderPanel.style.fontWeight = 'bold';
+	//  borderPanel.style.fontWeight = 'bold';
 	 
 	 var defs = (ss.vertices.length >= 1) ? graph.stylesheet.getDefaultVertexStyle() : graph.stylesheet.getDefaultEdgeStyle();
 	 var panel = (graph.cellEditor.isContentEditing()) ? this.createColorOption(mxResources.get('fontColor'), function()
@@ -3398,7 +3399,7 @@
 			 elt.style.color = null;
 		 });
 	 });
-	 panel.style.fontWeight = 'bold';
+	//  panel.style.fontWeight = 'bold';
 	 
 	 colorPanel.appendChild(panel);
 	 colorPanel.appendChild(bgPanel);
@@ -3439,7 +3440,7 @@
 	 span.style.position = 'absolute';
 	 span.style.width = '70px';
 	 span.style.marginTop = '0px';
-	 span.style.fontWeight = 'bold';
+	//  span.style.fontWeight = 'bold';
 	 mxUtils.write(span, mxResources.get('spacing'));
 	 spacingPanel.appendChild(span);
  
@@ -3828,7 +3829,7 @@
 		 }
 		 else
 		 {
-			 elt.style.backgroundImage = (selected) ? 'linear-gradient(#c5ecff 0px,#87d4fb 100%)' : '';
+			 elt.style.backgroundColor = (selected) ? 'rgba(22,155,250,.3)' : '';
 		 }
 	 };
 	 
@@ -4308,7 +4309,7 @@
 	 var ss = this.format.getSelectionState();
 	 container.style.paddingTop = '6px';
 	 container.style.paddingBottom = '6px';
-	 container.style.fontWeight = 'bold';
+	//  container.style.fontWeight = 'bold';
 	 container.style.display = 'none';
  
 	 try
@@ -4537,7 +4538,6 @@
 		 mxUtils.write(gradientOption, mxResources.get(directions[i]));
 		 gradientSelect.appendChild(gradientOption);
 	 }
-	 
 	 gradientPanel.appendChild(gradientSelect);
 	 
 	 for (var i = 0; i < Editor.roughFillStyles.length; i++)
@@ -4565,7 +4565,7 @@
 		 gradientSelect.value = value;
 		 fillStyleSelect.value = fillStyle;
 		 container.style.display = (ss.fill) ? '' : 'none';
-		 
+
 		 var fillColor = mxUtils.getValue(ss.style, mxConstants.STYLE_FILLCOLOR, null);
 			 
 		 if (!ss.fill || ss.containsImage || fillColor == null || fillColor == mxConstants.NONE || ss.style.shape == 'filledEdge')
@@ -4579,6 +4579,7 @@
 			 gradientPanel.style.display = (ss.style.sketch != '1' || fillStyle == 'solid' || fillStyle == 'auto') ? '' : 'none';
 		 }
 	 });
+
 	 
 	 graph.getModel().addListener(mxEvent.CHANGE, listener);
 	 this.listeners.push({destroy: function() { graph.getModel().removeListener(listener); }});
@@ -4589,7 +4590,6 @@
 		 graph.setCellStyles(mxConstants.STYLE_GRADIENT_DIRECTION, gradientSelect.value, graph.getSelectionCells());
 		 mxEvent.consume(evt);
 	 });
-	 
 	 mxEvent.addListener(fillStyleSelect, 'change', function(evt)
 	 {
 		 graph.setCellStyles('fillStyle', fillStyleSelect.value, graph.getSelectionCells());
@@ -4606,7 +4606,6 @@
 	 {
 		 container.appendChild(this.createCellColorOption(custom[i].title, custom[i].key, custom[i].defaultValue));
 	 }
-	 
 	 return container;
  };
  
@@ -4703,7 +4702,6 @@
 	 {
 		 mxEvent.consume(evt);
 	 });
- 
 	 var strokeKey = (ss.style.shape == 'image') ? mxConstants.STYLE_IMAGE_BORDER : mxConstants.STYLE_STROKECOLOR;
 	 var label = (ss.style.shape == 'image') ? mxResources.get('border') : mxResources.get('line');
 	 
@@ -5364,7 +5362,7 @@
 		 
 		 var span = document.createElement('div');
 		 span.style.position = 'absolute';
-		 span.style.fontWeight = 'bold';
+		//  span.style.fontWeight = 'bold';
 		 span.style.width = '80px';
 		 
 		 mxUtils.write(span, mxResources.get('lineJumps'));
@@ -5468,7 +5466,7 @@
 	 }
  
 	 table.style.width = '100%';
-	 table.style.fontWeight = 'bold';
+	//  table.style.fontWeight = 'bold';
 	 table.style.paddingRight = '20px';
 	 var tbody = document.createElement('tbody');
 	 var row = document.createElement('tr');
@@ -5608,7 +5606,7 @@
 	 }
  
 	 table.style.width = '100%';
-	 table.style.fontWeight = 'bold';
+	//  table.style.fontWeight = 'bold';
 	 
 	 var tbody = document.createElement('tbody');
 	 var row = document.createElement('tr');
@@ -6434,7 +6432,7 @@
 	 {
 		 input.style.marginTop = '-2px';
 		 input.style.right = '84px';
-		 stepper.style.marginTop = '-16px';
+		 stepper.style.marginTop = '-19px';
 		 stepper.style.right = '72px';
 	 
 		 var panel = this.createColorOption(mxResources.get('grid'), function()

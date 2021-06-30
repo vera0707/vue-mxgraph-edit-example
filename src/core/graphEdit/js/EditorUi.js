@@ -846,7 +846,7 @@
 		 {
 			 var update = mxUtils.bind(this, function()
 			 {
-				 var ff = graph.currentVertexStyle['fontFamily'] || 'Helvetica';
+				 var ff = graph.currentVertexStyle['fontFamily'] || 'Arial';
 				 var fs = String(graph.currentVertexStyle['fontSize'] || '12');
 						 var state = graph.getView().getState(graph.getSelectionCell());
 						 
@@ -1186,7 +1186,6 @@
 			 }
 			 else
 			 {
-				console.log(2);
 				 graphDblClick.apply(this, arguments);
 			 }
 		 }
@@ -1955,7 +1954,7 @@
 				 var pageInfo = document.createElement('div');
 				 pageInfo.style.display = 'inline-block';
 				 pageInfo.style.verticalAlign = 'top';
-				 pageInfo.style.fontFamily = 'Helvetica,Arial';
+				 pageInfo.style.fontFamily = 'Arial';
 				 pageInfo.style.marginTop = '8px';
 				 pageInfo.style.fontSize = '14px';
 				 pageInfo.style.color = '#ffffff';
@@ -2112,7 +2111,7 @@
 						 
 						 mxUtils.setPrefixedStyle(this.layersDialog.style, 'borderRadius', '5px');
 						 this.layersDialog.style.position = 'fixed';
-						 this.layersDialog.style.fontFamily = 'Helvetica,Arial';
+						 this.layersDialog.style.fontFamily = 'Arial';
 						 this.layersDialog.style.backgroundColor = '#000000';
 						 this.layersDialog.style.width = '160px';
 						 this.layersDialog.style.padding = '4px 2px 4px 2px';
@@ -3139,7 +3138,6 @@
 	 }
 	 else if (!this.editor.isChromelessView())
 	 {
-		console.log('2');
 		 if (mxUtils.hasScrollbars(graph.container))
 		 {
 			 if (graph.pageVisible)
@@ -3169,7 +3167,6 @@
 			 }
 			 else
 			 {
-				console.log('3');
 				 var bounds = graph.getGraphBounds();
 				 var width = Math.max(bounds.width, graph.scrollTileSize.width * graph.view.scale);
 				 var height = Math.max(bounds.height, graph.scrollTileSize.height * graph.view.scale);
