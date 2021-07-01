@@ -728,7 +728,7 @@
 						 graph.autoSizeCell(cells[i], false);
 					 }
 				 }
-				 
+				//  ===================
 				 ui.fireEvent(new mxEventObject('styleChanged', 'keys', [key],
 						 'values', [value], 'cells', cells));
 			 }
@@ -1128,7 +1128,7 @@
 				 'px;height:12px;margin:3px;border:1px solid black;background-color:' +
 				 mxUtils.htmlEntities((color != null && color != mxConstants.NONE) ?
 				 color : defaultColor) + ';"></div>';
-			 
+				 			 
 			 // Fine-tuning in Firefox, quirks mode and IE8 standards
 			 if (mxClient.IS_QUIRKS || document.documentMode == 8)
 			 {
@@ -1240,7 +1240,6 @@
 		 {
 			 return mxUtils.getValue(state.style, colorKey, null);
 		 }
-		 
 		 return null;
 	 }, function(color)
 	 {
@@ -6179,7 +6178,7 @@
 	 if (graph.isEnabled())
 	 {
 		 this.container.appendChild(this.addOptions(this.createPanel()));
-		 this.container.appendChild(this.addPaperSize(this.createPanel()));
+		//  this.container.appendChild(this.addPaperSize(this.createPanel()));
 		 this.container.appendChild(this.addStyleOps(this.createPanel()));
 	 }
  };

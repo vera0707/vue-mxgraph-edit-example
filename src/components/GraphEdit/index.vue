@@ -1,6 +1,6 @@
 <template>
   <div class="editMainContainer">
-    <div class="editLegendHeader">
+    <div class="editLegendHeader" v-if="enableEditing">
       <div @click="handleThumbnail" class="legendItem">
         <img src="~@/assets/coordinate.svg" width="10" alt="" />
         缩略图
@@ -9,14 +9,14 @@
         <img src="~@/assets/add.svg" width="10" alt="" />
         新增
       </div>
-      <div class="legendItem" @click="saveCurrentTopo = true">
+      <!-- <div class="legendItem" @click="saveCurrentTopo = true">
         <img src="~@/assets/save.svg" width="10" alt="" />
         导出
       </div>
       <div class="legendItem" @click="importFile = true">
         <i class="el-icon-folder-opened"></i>
         导入
-      </div>
+      </div> -->
       <div class="legendItem" @click="openEditCellDialog">
         <img src="~@/assets/edit.svg" width="10" alt="" />
         编辑数据
@@ -28,7 +28,11 @@
         <el-option label="test" value="test">test</el-option>
       </el-select>
     </div>
-    <div class="graphEditorContainer" ref="editorContainer"></div>
+    <div 
+      class="graphEditorContainer" 
+      ref="editorContainer"
+      @keydown="bindEvents"
+    ></div>
     <EditCellProperty
       :isVisible="cellProperty"
       :detailData="cellData"
@@ -63,6 +67,9 @@ export default {
     EditCellProperty,
     ImportFile,
   },
+  props:{
+    enableEditing: Boolean || true,
+  },
   data() {
     return {
       graph: null,
@@ -82,7 +89,7 @@ export default {
       const element = document.createElement("a");
       element.setAttribute(
         "href",
-        "data:application/xml;charset=utf-8," + text
+        "data:application/xml;charset=utf-8," + encodeURIComponent(text)
       );
       element.setAttribute("download", filename);
       element.style.display = "none";
@@ -90,7 +97,7 @@ export default {
       element.click();
       document.body.removeChild(element);
     },
-    exportTopology({ name }) {
+    exportTopology({ name = 'topology' } = {}) {
       const graphXml = this.editorUiInit.editor.getGraphXml();
       const xmlObject = new XMLSerializer().serializeToString(graphXml);
       this.downloadFile(`${name}.xml`, xmlObject);
@@ -125,6 +132,16 @@ export default {
       );
       this.importFile = false;
     },
+    bindEvents(e){
+      if(e.keyCode === 83) {
+        this.saveCurrentTopo = true;
+        e.preventDefault()
+      }
+      if(e.keyCode == 77) {
+        this.openEditCellDialog();
+        e.preventDefault()
+      }
+    }
   },
   mounted() {
     const self = this;
@@ -164,6 +181,7 @@ export default {
           new Editor(urlParams["chrome"] == "0", themes),
           container
         );
+        this.$emit('onInitEditGraph',this.editorUiInit);
       },
       () => {
         $Message.error("当前浏览器不支持");
@@ -174,6 +192,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .editMainContainer {
+  width: 100%;
+  height: 100%;
   position: relative;
 
   .editLegendHeader {
@@ -199,7 +219,7 @@ export default {
 }
 .graphEditorContainer {
   width: 100%;
-  height: calc(100vh - 37px);
+  height: 100%;
   position: relative;
   overflow: hidden;
   

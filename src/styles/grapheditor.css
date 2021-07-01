@@ -421,7 +421,7 @@ div.mxWindow .geButton {
 	background-repeat:no-repeat;
 	background-position:50% 50%;
 	border-radius: 8px;
-	margin: 5px 2px;
+	margin: 5px 0;
 }
 .geSidebar .geItem:hover {
 	background-color:#e0e0e0;
@@ -429,6 +429,17 @@ div.mxWindow .geButton {
 .geItem {
 	vertical-align: top;
 	display: inline-block;
+}
+.geItemTitle{
+	width: 100%;
+	font-size: 12px;
+	line-height: 14px;
+	overflow: auto;
+	text-align: center;
+}
+.geItemTitle div{
+	transform: scale(.65);
+	word-break: keep-all;
 }
 .geSidebarTooltip {
 	position:absolute;

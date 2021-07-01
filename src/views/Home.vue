@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <!-- <div class="header">在线拓扑编辑中心</div> -->
-    <GraphEdit />
-  </div>
+  <GraphEdit
+    :enableEditing="true"
+  />
 </template>
 
 <script>
@@ -12,9 +11,6 @@ export default {
   name: 'Home',
   components: {
     GraphEdit,
-  },
-  props: {
-    msg: String,
   },
 };
 </script>

@@ -1475,7 +1475,7 @@
 	 td.style.fontSize = '10pt';
 	 
 	 var accessor = PageSetupDialog.addPageFormatPanel(td, 'pagesetupdialog', graph.pageFormat);
- 
+	 
 	 row.appendChild(td);
 	 tbody.appendChild(row);
 	 

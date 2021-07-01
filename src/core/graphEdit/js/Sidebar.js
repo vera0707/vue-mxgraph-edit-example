@@ -1042,7 +1042,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
 		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 80, 80, '', '菱形', null, null, 'diamond rhombus if condition decision conditional question test'),
 		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 120, 60, '', '平行四边形'),
-		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱形', null, null, 'cylinder data database'),
+		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱体', null, null, 'cylinder data database'),
 		this.createVertexTemplateEntry('html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;', 90, 100, '', '立方体', true, null, 'cube box iso isometric'),
 
 
@@ -1167,9 +1167,14 @@ Sidebar.prototype.addUmlPalette = function(expand)
 	var dt = 'uml static class ';
 	this.setCurrentSearchEntryLibrary('uml');
 	
-	var fns = [
-   		this.createVertexTemplateEntry('html=1;', 110, 50, 'Object', 'Object', null, null, dt + 'object instance'),
-	];
+	const fns = [];
+	const list = ['CSOFTX3000','UMG8900','SIWF','HLR','SCP','SMSC','MMSC'];
+	list.forEach(type=>{
+		fns.push(
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.png`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', type, true, null, type)
+		)
+	});
 	
 	this.addPaletteFunctions('uml', mxResources.get('uml'), expand || false, fns);
 	this.setCurrentSearchEntryLibrary();
@@ -1315,12 +1320,13 @@ Sidebar.prototype.createItem = function(cells, title, showLabel, showTitle, widt
 	var border = (mxClient.IS_QUIRKS) ? 8 + 2 * this.thumbPadding : 2 * this.thumbBorder;
 	elt.style.width = (this.thumbWidth + border) + 'px';
 	elt.style.height = (this.thumbHeight + border) + 'px';
-	elt.style.padding = this.thumbPadding + 'px';
+	elt.style.padding = '0px 3px 10px';
 	
 	if (mxClient.IS_IE6)
 	{
 		elt.style.border = 'none';
 	}
+	
 	
 	// Blocks default click action
 	mxEvent.addListener(elt, 'click', function(evt)
@@ -1361,6 +1367,13 @@ Sidebar.prototype.createItem = function(cells, title, showLabel, showTitle, widt
 			}
 		}));
 	}
+
+	var titleCon = document.createElement('div');
+	titleCon.className = 'geItemTitle';
+	var titleText = document.createElement('div');
+	titleText.innerText = title;
+	titleCon.appendChild(titleText);
+	elt.appendChild(titleCon);
 	
 	return elt;
 };

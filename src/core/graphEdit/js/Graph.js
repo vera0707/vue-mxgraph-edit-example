@@ -2922,7 +2922,6 @@ Graph.prototype.restoreSelection = function(cells)
 				temp.push(newCell);
 			}
 		}
-
 		this.setSelectionCells(temp);
 	}
 	else

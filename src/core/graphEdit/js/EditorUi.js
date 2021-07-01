@@ -4568,6 +4568,7 @@
  {
 	 var editorUi = this;
 	 var graph = this.editor.graph;
+	 var graph = this.editor.graph;
 	 var keyHandler = new mxKeyHandler(graph);
  
 	 var isEventIgnored = keyHandler.isEventIgnored;
@@ -4868,11 +4869,15 @@
 		 return keyHandlerGetFunction.apply(this, arguments);
 	 };
  
+	  // 扩展键盘响应事件
+		// keyHandler.addAction = function(code,f){
+			// var keyHandler = new mxKeyHandler(graph);
+			// keyHandler.bindControlKey(code, f);		}
 	 // Binds keystrokes to actions
 	 keyHandler.bindAction = mxUtils.bind(this, function(code, control, key, shift)
 	 {
 		 var action = this.actions.get(key);
-		 
+
 		 if (action != null)
 		 {
 			 var f = function()
@@ -4946,8 +4951,8 @@
 		 keyHandler.bindAction(48, true, 'customZoom'); // Ctrl+0
 		 keyHandler.bindAction(82, true, 'turn'); // Ctrl+R
 		 keyHandler.bindAction(82, true, 'clearDefaultStyle', true); // Ctrl+Shift+R
-		 keyHandler.bindAction(83, true, 'save'); // Ctrl+S
-		 keyHandler.bindAction(83, true, 'saveAs', true); // Ctrl+Shift+S
+		//  keyHandler.bindAction(83, true, 'save'); // Ctrl+S
+		//  keyHandler.bindAction(83, true, 'saveAs', true); // Ctrl+Shift+S
 		 keyHandler.bindAction(65, true, 'selectAll'); // Ctrl+A
 		 keyHandler.bindAction(65, true, 'selectNone', true); // Ctrl+A
 		 keyHandler.bindAction(73, true, 'selectVertices', true); // Ctrl+Shift+I
@@ -4964,7 +4969,7 @@
 		 keyHandler.bindAction(67, true, 'copy'); // Ctrl+C
 		 keyHandler.bindAction(86, true, 'paste'); // Ctrl+V
 		 keyHandler.bindAction(71, true, 'group'); // Ctrl+G
-		 keyHandler.bindAction(77, true, 'editData'); // Ctrl+M
+		//  keyHandler.bindAction(77, true, 'editData'); // Ctrl+M
 		 keyHandler.bindAction(71, true, 'grid', true); // Ctrl+Shift+G
 		 keyHandler.bindAction(73, true, 'italic'); // Ctrl+I
 		 keyHandler.bindAction(76, true, 'lockUnlock'); // Ctrl+L
