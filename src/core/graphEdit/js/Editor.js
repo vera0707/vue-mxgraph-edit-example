@@ -268,7 +268,7 @@
  /**
 	* Specifies if the canvas should be extended in all directions. Default is true.
 	*/
- Editor.prototype.extendCanvas = true;
+ Editor.prototype.extendCanvas = false;
  
  /**
 	* Specifies if the app should run in chromeless mode. Default is false.
@@ -2426,15 +2426,14 @@
 			 if (graph.view.backgroundPageShape != null)
 			 {
 				 var bds = this.getBackgroundPageBounds();
-				 
 				 x0 = 1 + bds.x;
 				 y0 = 1 + bds.y;
 			 }
-			 
-			 // Computes the offset to maintain origin for grid
+			
 			 position = -Math.round(phase - mxUtils.mod(this.translate.x * this.scale - x0, phase)) + 'px ' +
 				 -Math.round(phase - mxUtils.mod(this.translate.y * this.scale - y0, phase)) + 'px';
-		 }
+				
+			}
 		 
 		 var canvas = graph.view.canvas;
 		 
@@ -2512,7 +2511,7 @@
 			 var phase = this.gridSize * this.view.scale * this.view.gridSteps;
 			 var position = -Math.round(phase - mxUtils.mod(this.view.translate.x * this.view.scale + dx, phase)) + 'px ' +
 				 -Math.round(phase - mxUtils.mod(this.view.translate.y * this.view.scale + dy, phase)) + 'px';
-			 canvas.style.backgroundPosition = position;
+				 canvas.style.backgroundPosition = position;
 		 }
 	 };
 	 
@@ -2658,7 +2657,7 @@
  
 		 var pw = fmt.width * ps;
 		 var ph = fmt.height * ps;
- 
+		
 		 var x0 = Math.floor(Math.min(0, x) / pw);
 		 var y0 = Math.floor(Math.min(0, y) / ph);
 		 var xe = Math.ceil(Math.max(1, x + w) / pw);
@@ -2666,7 +2665,6 @@
 		 
 		 var rows = xe - x0;
 		 var cols = ye - y0;
- 
 		 var bounds = new mxRectangle(this.scale * (this.translate.x + x0 * pw), this.scale *
 				 (this.translate.y + y0 * ph), this.scale * rows * pw, this.scale * cols * ph);
 		 return bounds;

@@ -34,9 +34,6 @@ export default {
       importFile: false,
     };
   },
-  created(){
-    this.bindEvents();
-  },
   methods: {
     initEditGraph(editorUiInit){
       this.editorUiInit = editorUiInit;
@@ -46,16 +43,20 @@ export default {
       this.editorUiInit.editor.graph.setSelectionCells(
         this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
       );
+      this.editorUiInit.actions.get("lockUnlock").funct()
+      mxPopupMenu.prototype.enabled = false
       this.importFile = false;
+      this.handleRender();
     },
-    bindEvents(){
-      document.oncontextmenu=(event)=>{
-        event.returnValue=false;
-      }; 
-      // document.body.contextmenu = (e)=>{
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      // }
+    handleRender(){
+      const model = this.editorUiInit.editor.graph.getModel();
+      const cells = model.cells || [];
+      for(let index in cells){
+        if(model.isVertex(cells[index])) {
+          const value = model.getValue(cells[index]);
+          console.log('这是个图形 图形属性值',value);
+        }else console.log('这是个边边');
+      }
     }
   },
 };
@@ -88,9 +89,15 @@ export default {
   }
   .geDiagramContainer{
     inset: 0 !important;
+    &>svg{
+      background-image: none !important;
+    }
   }
   .geHsplit{
     display: none;
+  }
+  div.mxPopupMenu{
+    display: none !important;
   }
 }
 </style>

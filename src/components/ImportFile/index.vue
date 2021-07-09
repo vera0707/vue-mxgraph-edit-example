@@ -21,7 +21,8 @@
 </template>
 <script>
 export default {
-  name: 'ImportFile',
+  name: 'importFile',
+  emits: ['onDialogClose', 'onDialogConfirm'],
   props: {
     isVisible: Boolean || false,
   },

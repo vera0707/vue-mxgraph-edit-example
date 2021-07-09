@@ -9,14 +9,14 @@
         <img src="~@/assets/add.svg" width="10" alt="" />
         新增
       </div>
-      <!-- <div class="legendItem" @click="saveCurrentTopo = true">
+      <div class="legendItem" @click="saveCurrentTopo = true">
         <img src="~@/assets/save.svg" width="10" alt="" />
-        导出
+        保存
       </div>
       <div class="legendItem" @click="importFile = true">
         <i class="el-icon-folder-opened"></i>
         导入
-      </div> -->
+      </div>
       <div class="legendItem" @click="openEditCellDialog">
         <img src="~@/assets/edit.svg" width="10" alt="" />
         编辑数据

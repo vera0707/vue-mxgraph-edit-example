@@ -2134,7 +2134,6 @@ Graph.prototype.init = function(container)
 			this.scale = this.graph.currentScale;
 			this.translate = this.graph.currentTranslate;
 		}
-		
 		graphViewValidateBackgroundPage.apply(this, arguments);
 		
 		if (useCssTranforms)
@@ -2465,7 +2464,6 @@ Graph.prototype.getPageLayout = function()
 			this.view.translate.x) / size.width) - x0;
 		var h0 = Math.ceil((Math.floor((bounds.y + bounds.height) / this.view.scale) -
 			this.view.translate.y) / size.height) - y0;
-		
 		return new mxRectangle(x0, y0, w0, h0);
 	}
 };

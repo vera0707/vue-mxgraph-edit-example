@@ -6614,7 +6614,7 @@
 	 btn.setAttribute('title', mxResources.get('clearDefaultStyle') + ' (' + this.editorUi.actions.get('clearDefaultStyle').shortcut + ')');
 	 btn.style.width = '202px';
 	 div.appendChild(btn);
- 
+
 	 return div;
  };
  
