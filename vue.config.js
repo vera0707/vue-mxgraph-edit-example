@@ -9,6 +9,7 @@ const venderList = [
   'mxgraph/javascript/mxClient.min.js',
   'js/EditorUi.js',
   'js/Editor.js',
+  'config/neList.js',
   'js/Sidebar.js',
   'js/Graph.js',
   'js/Format.js',

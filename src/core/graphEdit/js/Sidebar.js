@@ -84,6 +84,8 @@ Sidebar.prototype.init = function()
 	this.addSearchPalette(true);
 	// 基本组件
 	this.addGeneralPalette(true);
+	// 无线网
+	this.addWirelessPalette(false);
 	// 核心网
 	this.addMiscPalette(false);
 	// 传输网
@@ -1094,18 +1096,32 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 };
 
 /**
+ * Adds the wireless palette to the sidebar.
+ */
+Sidebar.prototype.addWirelessPalette = function(expand){
+	this.setCurrentSearchEntryLibrary('general', 'wire');
+	var fns = [];	
+	sidebarNeList.wirelessNework.forEach(item=>{
+		fns.push(
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.iconName}.${item.fileType}`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
+		)
+	});
+	this.addPaletteFunctions('wire', '无线网', (expand != null) ? expand : true, fns);
+	this.setCurrentSearchEntryLibrary();
+}
+
+/**
  * Adds the general palette to the sidebar.
  */
 Sidebar.prototype.addMiscPalette = function(expand)
 {
 	this.setCurrentSearchEntryLibrary('general', 'misc');
-	const fns = [];
-	
-	const neType = ['AMF','AUSF','HSS','MME','NEF','NRF','NSSF','PCF','PCRF','PGW','SGW','SMF','UDM','UPF'];
-	neType.forEach(type=>{
+	var fns = [];	
+	sidebarNeList.coreNetwork.forEach(item=>{
 		fns.push(
-			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', type, true, null, type)
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.iconName}.${item.fileType}`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
 		)
 	});
 	this.addPaletteFunctions('misc', '核心网', (expand != null) ? expand : true, fns);
@@ -1118,11 +1134,10 @@ Sidebar.prototype.addAdvancedPalette = function(expand)
 {
 	this.setCurrentSearchEntryLibrary('general', 'advanced');
 	const fns = [];
-	const list = ['SDH','PON','PTN','OTN','IPRAN','SPN','ODN','OLT','ONT','ONU'];
-	list.forEach(type=>{
+	sidebarNeList.transmissionNework.forEach(item=>{
 		fns.push(
-			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', type, true, null, type)
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.iconName}.${item.fileType}`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
 		)
 	});
 
@@ -1168,13 +1183,12 @@ Sidebar.prototype.addUmlPalette = function(expand)
 	this.setCurrentSearchEntryLibrary('uml');
 	
 	const fns = [];
-	// const list = ['CSOFTX3000','UMG8900','SIWF','HLR','SCP','SMSC','MMSC'];
-	// list.forEach(type=>{
-	// 	fns.push(
-	// 		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${type}.png`,
-	// 			 this.defaultImageWidth, this.defaultImageHeight, '', type, true, null, type)
-	// 	)
-	// });
+	sidebarNeList.dataNetwork.forEach(item=>{
+		fns.push(
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.iconName}.${item.fileType}`,
+				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
+		)
+	});
 	
 	this.addPaletteFunctions('uml', mxResources.get('uml'), expand || false, fns);
 	this.setCurrentSearchEntryLibrary();
@@ -1189,33 +1203,9 @@ Sidebar.prototype.addBpmnPalette = function(dir, expand)
 	const fns = [];
 	this.setCurrentSearchEntryLibrary('bpmn');
 
-	const list = [
-		{type: 'operator',title: '操作员',format: 'svg'},
-		{type: 'computer',title: '电脑',format: 'svg'},
-		{type:'firewall',title: '防护墙',format: 'svg'},
-		{type: 'server',title: '服务器',format: 'svg'},
-		{type: 'user',title: '用户',format: 'svg'},
-		{type: 'client',title: '客户',format: 'svg'},
-		{type: 'pad',title: 'pad',format: 'svg'},
-		{type: 'phone',title: '手机',format: 'svg'},
-		{type: 'lightning',title: '闪电',format: 'svg'},
-		{type: 'customer',title: '客户群',format: 'svg'},
-		{type: 'router',title: '路由',format: 'svg'},
-		{type: 'switch',title: '交换机',format: 'svg'},
-		{type: 'government',title:'政企业务编排', format: 'png' },
-		{type: 'oss',title:'故障管理中心', format: 'png' },
-		{type: 'maintenance',title:'运维管理中心', format: 'png' },
-		{type: 'performance',title:'性能管理中心', format: 'png' },
-		{type: 'business',title:'业务编排中心', format: 'png' },
-		{type: 'nsmf',title:'NSMF', format: 'png' },
-		{type: 'webcam',title:'摄像头', format: 'png' },
-		{type: 'soft_water',title:'软水准仪', format: 'png' },
-		{type: 'hard_water',title:'硬水准仪', format: 'png' },
-		{type: 'media_server',title:'流媒体服务器', format: 'png' },
-	];
-	list.forEach(item=>{
+	sidebarNeList.others.forEach(item=>{
 		fns.push(
-			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.type}.${item.format}`,
+			this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/${item.iconName}.${item.fileType || 'svg'}`,
 				 this.defaultImageWidth, this.defaultImageHeight, '', item.title, true, null, item.title)
 		)
 	});
