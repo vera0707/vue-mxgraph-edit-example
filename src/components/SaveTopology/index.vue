@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input
-          v-model="formData.remark"
+          v-model="formData.description"
           type="textarea"
           :rows="2"
           placeholder="请输入"
@@ -37,8 +37,6 @@
   </el-dialog>
 </template>
 <script>
-import topoApi from '@/api/index';
-
 const actionDialogRules = {
   name: [{ required: true, message: '请输入', trigger: 'change' }],
 };
@@ -67,14 +65,7 @@ export default {
     dialogConfirm() {
       this.$refs.dialogForm.validate((valid) => {
         if (valid) {
-          topoApi.saveTopoInfo({
-
-          }).then((res) => {
-            if (res.retCode === '200') {
-              this.$message.success('保存成功');
-              this.$emit('onDialogConfirm', this.formData);
-            }
-          });
+          this.$emit('onDialogConfirm', this.formData);
         }
       });
     },

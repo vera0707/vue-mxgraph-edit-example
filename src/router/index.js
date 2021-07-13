@@ -18,7 +18,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "showTopo" */ '../views/Show.vue'),
   },
 ];
-console.log('路由', process.env.BASE_URL);
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
   routes,

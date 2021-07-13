@@ -18,7 +18,11 @@
             <el-input v-model="formData.name" clearable placeholder="请输入"></el-input>
           </el-form-item>
           <el-form-item label="网络类型" prop="type">
-            <el-input v-model="formData.type" clearable placeholder="请输入"></el-input>
+            <el-select
+              v-model="formData.type"
+              style="width:100%" placeholder="请选择" clearable filterable>
+              <el-option value="BMW" label="BMW">BMW</el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="网元类型" prop="neType">
             <el-select

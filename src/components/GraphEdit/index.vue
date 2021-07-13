@@ -13,10 +13,10 @@
         <img src="~@/assets/save.svg" width="10" alt="" />
         保存
       </div>
-      <div class="legendItem" @click="importFile = true">
+      <!-- <div class="legendItem" @click="importFile = true">
         <i class="el-icon-folder-opened"></i>
         导入
-      </div>
+      </div> -->
       <div class="legendItem" @click="openEditCellDialog">
         <img src="~@/assets/edit.svg" width="10" alt="" />
         编辑数据
@@ -24,8 +24,13 @@
       <div class="legendItem" style="margin-right: 5px">
         拓扑选择
       </div>
-      <el-select v-model="topoVal" placeholder="请选择" clearable size="mini">
-        <el-option label="test" value="test">test</el-option>
+      <el-select v-model="currentTopoInfo" placeholder="请选择" clearable size="mini">
+        <el-option
+          v-for="item in topoList"
+          :key="item.id"
+          :label="item.name"
+          :value="item"
+        >{{item.name}}</el-option>
       </el-select>
     </div>
     <div 
@@ -47,17 +52,18 @@
       v-on:onDialogClose="saveCurrentTopo = false"
       v-on:onDialogConfirm="exportTopology"
     />
-    <ImportFile
+    <!-- <ImportFile
       :isVisible="importFile"
       v-on:onDialogClose="importFile = false"
       v-on:onDialogConfirm="parseXmlFile"
-    />
+    /> -->
   </div>
 </template>
 <script>
+import topoApi from '@/api/index';
 import SaveTopology from "@/components/SaveTopology";
 import EditCellProperty from "@/components/EditCellProperty";
-import ImportFile from "@/components/ImportFile";
+// import ImportFile from "@/components/ImportFile";
 
 import "@/styles/grapheditor.css";
 export default {
@@ -65,43 +71,74 @@ export default {
   components: {
     SaveTopology,
     EditCellProperty,
-    ImportFile,
+    // ImportFile,
   },
   props:{
     enableEditing: Boolean || true,
   },
+  watch:{
+    currentTopoInfo(val,old){
+      if(val && val.content) {
+        const doc = window.mxUtils.parseXml(val.content);
+        this.editorUiInit.editor.graph.setSelectionCells(
+        this.editorUiInit.editor.graph.importGraphModel(doc.documentElement),
+      );
+      }
+    }
+  },
   data() {
     return {
       graph: null,
-      topoVal: "",
+      currentTopoInfo: null,
       saveCurrentTopo: false,
       cellProperty: false,
-      importFile: false,
+      // importFile: false,
       cellData: {},
+      topoList:[],
     };
   },
+  created(){
+    this.fetchTopoList();
+  },
   methods: {
+    fetchTopoList(){
+      if(!this.enableEditing) return;
+      topoApi.fetchTopoList({
+        pageSize: 100
+      }).then(res=>{
+        if(res.retCode === '200') {
+          this.topoList = res.data?.records || []
+        }
+      });
+    },
     handleThumbnail() {
       this.editorUiInit.actions.get("outline").funct();
       this.editorUiInit.refresh();
     },
-    downloadFile(filename, text) {
-      const element = document.createElement("a");
-      element.setAttribute(
-        "href",
-        "data:application/xml;charset=utf-8," + encodeURIComponent(text)
-      );
-      element.setAttribute("download", filename);
-      element.style.display = "none";
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    },
-    exportTopology({ name = 'topology' } = {}) {
+    // downloadFile(filename, text) {
+    //   const element = document.createElement("a");
+    //   element.setAttribute(
+    //     "href",
+    //     "data:application/xml;charset=utf-8," + encodeURIComponent(text)
+    //   );
+    //   element.setAttribute("download", filename);
+    //   element.style.display = "none";
+    //   document.body.appendChild(element);
+    //   element.click();
+    //   document.body.removeChild(element);
+    // },
+    exportTopology(formData) {
       const graphXml = this.editorUiInit.editor.getGraphXml();
       const xmlObject = new XMLSerializer().serializeToString(graphXml);
-      this.downloadFile(`${name}.xml`, xmlObject);
-      this.saveCurrentTopo = false;
+      topoApi.saveTopoInfo({
+        ...formData,
+        content: xmlObject
+      }).then(res=>{
+        if(res.retCode === '200'){
+          this.$message.success('保存成功');
+          this.saveCurrentTopo = false;
+        }else this.$message.error('保存失败');
+      });
     },
     saveActiveCell(cellProperty) {
       const { cell } = this.cellData;
@@ -125,13 +162,13 @@ export default {
       this.cellProperty = true;
       this.cellData = { cell, value };
     },
-    parseXmlFile(xml) {
-      const doc = window.mxUtils.parseXml(xml);
-      this.editorUiInit.editor.graph.setSelectionCells(
-        this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
-      );
-      this.importFile = false;
-    },
+    // parseXmlFile(xml) {
+    //   const doc = window.mxUtils.parseXml(xml);
+    //   this.editorUiInit.editor.graph.setSelectionCells(
+    //     this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
+    //   );
+    //   this.importFile = false;
+    // },
     bindEvents(e){
       if(e.keyCode === 83) {
         this.saveCurrentTopo = true;
