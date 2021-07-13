@@ -7,7 +7,22 @@ var wireless = ['AAU','gNB'];
 
 // 传输网
 var transmission1 = ['SDH','PON','PTN','OTN','IPRAN','SPN','ODN','ONT'];
-var transmission2 = ['OLT','ONU']
+var transmission2 = [
+  { iconName: 'OLT',title: 'OLT',fileType:'png' },
+  { iconName: 'ONU',title: 'ONU',fileType:'png' },
+  { iconName: 'light_amplifier',title: '光放大器',fileType:'png' },
+  { iconName: 'unidirectional_amplifier',title: '单向放大器',fileType:'png' },
+  { iconName: 'two_way_amplifier',title: '双向放大器',fileType:'png' },
+  { iconName: 'WDM',title: 'WDM',fileType:'png' },
+  { iconName: 'combiner',title: '合路器',fileType:'png' },
+  { iconName: 'splitter', title: '分光器/合波器',fileType:'png' },
+  { iconName: 'ONT', title: 'ONT',fileType:'png' },
+  { iconName: 'MDU', title: 'MDU',fileType:'png' },
+  { iconName: 'ODF', title: 'ODF',fileType:'png' },
+  { iconName: 'access_node', title: 'Access node',fileType:'png' },
+  
+
+]
 // 数据网
 var data = [
   { iconName: 'switch',title: '交换机',fileType:'png' },
@@ -45,7 +60,7 @@ window.sidebarNeList =  {
   ],
   transmissionNework: [
     ...transmission1.map(v=>({iconName: v, title: v, fileType: 'svg'})),
-    ...transmission2.map(v=>({iconName: v, title: v, fileType: 'png'})),
+    ...transmission2,
   ],
   wirelessNework: wireless.map(v=>({iconName: v, title: v, fileType: 'png'})),
   dataNetwork: data,
