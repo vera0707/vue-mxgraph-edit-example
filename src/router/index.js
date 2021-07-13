@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 
 const routes = [
@@ -10,12 +10,17 @@ const routes = [
   {
     path: '/open',
     name: 'Open',
-    component: () => import(/* webpackChunkName: "showTopo" */ '../views/Open.vue'),
+    component: () => import(/* webpackChunkName: "openTopo" */ '../views/Open.vue'),
+  },
+  {
+    path: '/show',
+    name: 'Show',
+    component: () => import(/* webpackChunkName: "showTopo" */ '../views/Show.vue'),
   },
 ];
-
+console.log('路由', process.env.BASE_URL);
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
 

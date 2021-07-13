@@ -1,8 +1,11 @@
+*{
+  box-sizing: border-box;
+}
 html, body {
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
 }
 .pointer{
   cursor: pointer;
@@ -19,6 +22,9 @@ html, body {
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background: rgba(123, 147, 167, .3);
+}
+.graphEditorContainer *{
+  box-sizing: content-box;
 }
 .graphEditorContainer input,
 .graphEditorContainer select,

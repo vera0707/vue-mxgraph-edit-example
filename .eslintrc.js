@@ -18,5 +18,6 @@ module.exports = {
     '/src/core/graphEdit/*',
     'src/components/GraphEdit/*',
     'src/views/Open.vue',
+    'src/views/Show.vue',
   ]
 };
