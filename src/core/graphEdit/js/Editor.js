@@ -748,7 +748,7 @@
  /**
 	* Displays an error message.
 	*/
- OpenFile.prototype.error = function(msg)
+ OpenFile.prototype.t = function(msg)
  {
 	 this.cancel(true);
 	 mxUtils.alert(msg);

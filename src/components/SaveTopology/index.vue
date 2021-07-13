@@ -37,6 +37,8 @@
   </el-dialog>
 </template>
 <script>
+import topoApi from '@/api/index';
+
 const actionDialogRules = {
   name: [{ required: true, message: '请输入', trigger: 'change' }],
 };
@@ -65,8 +67,14 @@ export default {
     dialogConfirm() {
       this.$refs.dialogForm.validate((valid) => {
         if (valid) {
-          this.$message.success('保存成功');
-          this.$emit('onDialogConfirm', this.formData);
+          topoApi.saveTopoInfo({
+
+          }).then((res) => {
+            if (res.retCode === '200') {
+              this.$message.success('保存成功');
+              this.$emit('onDialogConfirm', this.formData);
+            }
+          });
         }
       });
     },

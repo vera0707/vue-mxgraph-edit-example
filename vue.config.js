@@ -34,4 +34,12 @@ module.exports = {
       new AddAssetHtmlPlugin(assetHtmlList),
     ],
   },
+  devServer: {
+    open: true,
+    proxy: {
+      '/txo': {
+        target: 'http://10.1.193.28:10012/',
+      },
+    },
+  },
 };

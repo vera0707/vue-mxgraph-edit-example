@@ -28,15 +28,32 @@ export default {
       this.editorUiInit.editor.graph.setSelectionCells(
         this.editorUiInit.editor.graph.importGraphModel(doc.documentElement),
       );
-      this.editorUiInit.actions.get('lockUnlock').funct();
+      this.handleRender()
+      // 网格背景设置 
+      this.editorUiInit.editor.graph.setGridEnabled(false);
+      // 画布编辑锁定
+      // this.editorUiInit.editor.graph.setEnabled(false);
+      // this.editorUiInit.actions.get('selectNone').funct();
+    },
+    addAlarmOverlay(cell){
+      const overlay = new mxCellOverlay(new mxImage('images/hs.png', 50, 50), '告警等级');
+      overlay.cursor = 'hand';
+      overlay.offset = new mxPoint(-4, 8);
+		  overlay.align = mxConstants.ALIGN_RIGHT;
+		  overlay.verticalAlign = mxConstants.ALIGN_TOP;
+      this.editorUiInit.editor.graph.addCellOverlay(cell, mxCellOverlay);
+      // console.log('===',cell);
+      
     },
     handleRender() {
       const model = this.editorUiInit.editor.graph.getModel();
       const cells = model.cells || [];
       for (const index in cells) {
         if (model.isVertex(cells[index])) {
-          const value = model.getValue(cells[index]);
-          console.log('这是个图形 图形属性值', value);
+          this.addAlarmOverlay(cells[i]);
+          console.log('加了一个')
+          // const value = model.getValue(cells[index]);
+          // console.log('这是个图形 图形属性值', value);
         } else console.log('这是个边边');
       }
     },
@@ -61,7 +78,7 @@ export default {
   .geDiagramContainer{
     inset: 0 !important;
     &>svg{
-      background-image: none !important;
+      background: #F9F9F9 !important;
     }
   }
   .geHsplit{
