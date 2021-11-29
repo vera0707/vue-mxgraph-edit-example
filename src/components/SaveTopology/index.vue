@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input
-          v-model="formData.description"
+          v-model="formData.remark"
           type="textarea"
           :rows="2"
           placeholder="请输入"

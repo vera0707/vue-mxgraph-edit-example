@@ -13,10 +13,10 @@
         <img src="~@/assets/save.svg" width="10" alt="" />
         保存
       </div>
-      <!-- <div class="legendItem" @click="importFile = true">
+      <div class="legendItem" @click="importFile = true">
         <i class="el-icon-folder-opened"></i>
         导入
-      </div> -->
+      </div>
       <div class="legendItem" @click="openEditCellDialog">
         <img src="~@/assets/edit.svg" width="10" alt="" />
         编辑数据
@@ -24,13 +24,8 @@
       <div class="legendItem" style="margin-right: 5px">
         拓扑选择
       </div>
-      <el-select v-model="currentTopoInfo" placeholder="请选择" clearable size="mini">
-        <el-option
-          v-for="item in topoList"
-          :key="item.id"
-          :label="item.name"
-          :value="item"
-        >{{item.name}}</el-option>
+      <el-select v-model="topoVal" placeholder="请选择" clearable size="mini">
+        <el-option label="test" value="test">test</el-option>
       </el-select>
     </div>
     <div 
@@ -52,93 +47,60 @@
       v-on:onDialogClose="saveCurrentTopo = false"
       v-on:onDialogConfirm="exportTopology"
     />
-    <!-- <ImportFile
+    <ImportFile
       :isVisible="importFile"
       v-on:onDialogClose="importFile = false"
       v-on:onDialogConfirm="parseXmlFile"
-    /> -->
+    />
   </div>
 </template>
 <script>
-import topoApi from '@/api/index';
 import SaveTopology from "@/components/SaveTopology";
 import EditCellProperty from "@/components/EditCellProperty";
-// import ImportFile from "@/components/ImportFile";
-
+import ImportFile from "@/components/ImportFile";
 import "@/styles/grapheditor.css";
 export default {
   name: "GraphEdit",
   components: {
     SaveTopology,
     EditCellProperty,
-    // ImportFile,
+    ImportFile,
   },
   props:{
     enableEditing: Boolean || true,
   },
-  watch:{
-    currentTopoInfo(val,old){
-      if(val && val.content) {
-        const doc = window.mxUtils.parseXml(val.content);
-        this.editorUiInit.editor.graph.setSelectionCells(
-        this.editorUiInit.editor.graph.importGraphModel(doc.documentElement),
-      );
-      }
-    }
-  },
   data() {
     return {
       graph: null,
-      currentTopoInfo: null,
+      topoVal: "",
       saveCurrentTopo: false,
       cellProperty: false,
-      // importFile: false,
+      importFile: false,
       cellData: {},
-      topoList:[],
     };
   },
-  created(){
-    this.fetchTopoList();
-  },
   methods: {
-    fetchTopoList(){
-      if(!this.enableEditing) return;
-      topoApi.fetchTopoList({
-        pageSize: 100
-      }).then(res=>{
-        if(res.retCode === '200') {
-          this.topoList = res.data?.records || []
-        }
-      });
-    },
     handleThumbnail() {
       this.editorUiInit.actions.get("outline").funct();
       this.editorUiInit.refresh();
     },
-    // downloadFile(filename, text) {
-    //   const element = document.createElement("a");
-    //   element.setAttribute(
-    //     "href",
-    //     "data:application/xml;charset=utf-8," + encodeURIComponent(text)
-    //   );
-    //   element.setAttribute("download", filename);
-    //   element.style.display = "none";
-    //   document.body.appendChild(element);
-    //   element.click();
-    //   document.body.removeChild(element);
-    // },
-    exportTopology(formData) {
+    downloadFile(filename, text) {
+      const element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:application/xml;charset=utf-8," + encodeURIComponent(text)
+      );
+      element.setAttribute("download", filename);
+      element.style.display = "none";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+    exportTopology({ name = 'topology' } = {}) {
       const graphXml = this.editorUiInit.editor.getGraphXml();
       const xmlObject = new XMLSerializer().serializeToString(graphXml);
-      topoApi.saveTopoInfo({
-        ...formData,
-        content: xmlObject
-      }).then(res=>{
-        if(res.retCode === '200'){
-          this.$message.success('保存成功');
-          this.saveCurrentTopo = false;
-        }else this.$message.error('保存失败');
-      });
+      this.downloadFile(`${name}.xml`, xmlObject);
+      this.saveCurrentTopo = false;
     },
     saveActiveCell(cellProperty) {
       const { cell } = this.cellData;
@@ -162,13 +124,13 @@ export default {
       this.cellProperty = true;
       this.cellData = { cell, value };
     },
-    // parseXmlFile(xml) {
-    //   const doc = window.mxUtils.parseXml(xml);
-    //   this.editorUiInit.editor.graph.setSelectionCells(
-    //     this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
-    //   );
-    //   this.importFile = false;
-    // },
+    parseXmlFile(xml) {
+      const doc = window.mxUtils.parseXml(xml);
+      this.editorUiInit.editor.graph.setSelectionCells(
+        this.editorUiInit.editor.graph.importGraphModel(doc.documentElement)
+      );
+      this.importFile = false;
+    },
     bindEvents(e){
       if(e.keyCode === 83) {
         this.saveCurrentTopo = true;
@@ -185,7 +147,6 @@ export default {
     const container = this.$refs.editorContainer;
     const editorUiInit = EditorUi.prototype.init;
     const $Message = this.$message;
-
     EditorUi.prototype.init = function () {
       editorUiInit.apply(this, arguments);
       this.actions.get("export").setEnabled(false);
@@ -199,12 +160,10 @@ export default {
         "Cmd+M"
       );
     };
-
     mxResources.loadDefaultBundle = false;
     const bundle =
       mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
       mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
-
     mxUtils.getAll(
       [bundle, "/resources/default.xml"],
       (xhr) => {
@@ -212,7 +171,6 @@ export default {
         mxResources.parse(xhr[0].getText());
         const themes = {};
         themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
-
         // 启动
         this.editorUiInit = new EditorUi(
           new Editor(urlParams["chrome"] == "0", themes),
@@ -232,7 +190,6 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-
   .editLegendHeader {
     position: absolute;
     top: 0;
@@ -247,7 +204,6 @@ export default {
       cursor: pointer;
       font-size: 12px;
       margin-right: 15px;
-
       &.disable {
         opacity: 0.2;
       }

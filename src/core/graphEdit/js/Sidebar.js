@@ -1030,67 +1030,57 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 	this.setCurrentSearchEntryLibrary('general', 'general');
 
 	var fns = [
-		this.createVertexTemplateEntry('text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=center;', 100, 40, 'Text', '文本', null, null, 'Text',false),
-		this.createVertexTemplateEntry('html=1;', 110, 50, 'Text', '带框文本', null, null, 'Text'),
-		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '正方形', null, null, 'square'),
-		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆角矩形', null, null, 'rect rectangle box'),
-		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', '长方形', null, null, 'rect rectangle box'),
-		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 120, 60, '', '圆角长方形', null, null, 'rounded rect rectangle box'),
-		
-		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;aspect=fixed;', 80, 80, '', '圆形', null, null, 'circle'),
-		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;', 120, 80, '', '椭圆', null, null, 'oval ellipse state'),
-	
+		this.createVertexTemplateEntry('text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=center;', 60, 20, 'Text', '文本', null, null, '文本', false),
+		this.createVertexTemplateEntry('html=1;', 60, 30, 'Text', '带框文本', null, null, '带框文本'),
+		this.createVertexTemplateEntry('whiteSpace=wrap;html=1;aspect=fixed;', 50, 50, '', '正方形', null, null, '正方形'),
+		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;aspect=fixed;', 50, 50, '', '圆角矩形', null, null, '圆角矩形'),
+		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 60, 30, '', '长方形', null, null, '长方形'),
+		this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 60, 30, '', '圆角长方形', null, null, '圆角长方形'),
 
-		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 60, 80, '', '三角形', null, null, 'triangle logic inverter buffer'),
-		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 80, 80, '', '菱形', null, null, 'diamond rhombus if condition decision conditional question test'),
-		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 120, 60, '', '平行四边形'),
-		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 60, 80, '', '圆柱体', null, null, 'cylinder data database'),
-		this.createVertexTemplateEntry('html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;', 90, 100, '', '立方体', true, null, 'cube box iso isometric'),
+		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;aspect=fixed;', 50, 50, '', '圆形', null, null, '圆形'),
+		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;', 60, 40, '', '椭圆', null, null, '椭圆'),
 
 
-		this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 120, 80,'','云',null,'cloud'),
-		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud1.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
+		this.createVertexTemplateEntry('triangle;whiteSpace=wrap;html=1;', 50, 50, '', '三角形', null, null, '三角形'),
+		this.createVertexTemplateEntry('rhombus;whiteSpace=wrap;html=1;', 50, 50, '', '菱形', null, null, '菱形'),
+		this.createVertexTemplateEntry('shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;', 60, 30, '', '平行四边形'),
+		this.createVertexTemplateEntry('shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;', 40, 60, '', '圆柱体', null, null, '圆柱体'),
+		this.createVertexTemplateEntry('html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;', 40, 60, '', '立方体', true, null, '立方体'),
 
-		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud2.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
-				 
-		this.createVertexTemplateEntry(`image;html=1;image=/images/stencils/cloud3.svg`,
-				 this.defaultImageWidth, this.defaultImageHeight, '', '云', true, null, '云'),
+		this.createVertexTemplateEntry('ellipse;shape=cloud;whiteSpace=wrap;html=1;', 60, 40, '', '云', null, '云'),
 
-				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头', null, lineTags + 'bidirectional'),
-				 this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 50, 50, '', '单箭头', null, lineTags + 'directional directed'),
-				 this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 50, 50, '', '虚线', null, lineTags + 'dashed undirected no'),
-				 this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;', 50, 50, '', '虚线', null, lineTags + 'dotted undirected no'),
-				 this.createEdgeTemplateEntry('endArrow=none;html=1;', 50, 50, '', '实线', null, lineTags + 'simple undirected plain blank no'),
-				 this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', '双箭头实线', null, lineTags + 'bidirectional'),
-				 this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 50, '', '单箭头实线', null, lineTags + 'directional directed'),		 
+		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;startArrow=classic;html=1;', 40, 40, '', '双箭头', null, '双箭头'),
+		this.createEdgeTemplateEntry('shape=flexArrow;endArrow=classic;html=1;', 40, 40, '', '单箭头', null, '单箭头'),
+		this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;', 30, 30, '', '虚线', null, lineTags + '虚线'),
+		this.createEdgeTemplateEntry('endArrow=none;dashed=1;html=1;dashPattern=13;strokeWidth=1;', 30, 30, '', '虚线', null, '虚线'),
+		this.createEdgeTemplateEntry('endArrow=none;html=1;', 30, 30, '', '实线', null, '实线'),
+		this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 30, 30, '', '双箭头实线', null, '双箭头实线'),
+		this.createEdgeTemplateEntry('endArrow=classic;html=1;', 30, 30, '', '单箭头实线', null, '单箭头实线'),
 
-				this.addEntry('curve', mxUtils.bind(this, function()
-				{
-				 var cell = new mxCell('', new mxGeometry(0, 0, 50, 50), 'curved=1;endArrow=classic;html=1;');
-				 cell.geometry.setTerminalPoint(new mxPoint(0, 50), true);
-				 cell.geometry.setTerminalPoint(new mxPoint(50, 0), false);
-				 cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
-				 cell.geometry.relative = true;
-				 cell.edge = true;
-				 
-					 return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
-				})), 
-				 this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;', 50, 100, '', '曲线'),
-				 this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;elbow=vertical;', 50, 100, '', '曲线'),
-				 this.createVertexTemplateEntry('shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;', 20, 120, '', '花括号'),
-				 this.createVertexTemplateEntry('line;strokeWidth=2;html=1;', 160, 10, '', '横线'),
-				 this.createVertexTemplateEntry('line;strokeWidth=2;direction=south;html=1;', 10, 160, '', '竖线'),
-				 this.createVertexTemplateEntry('shape=crossbar;whiteSpace=wrap;html=1;rounded=1;', 120, 20, '', '横杆', false, null, 'crossbar distance measure dimension unit'),
-				 this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;', 120, 60, '', '部分矩形'),
-				 this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;', 120, 60, '', '部分矩形'),
-				 this.createEdgeTemplateEntry('edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;', 50, 50, '', '折线', null, lineTags + 'manual'),
-				 this.createEdgeTemplateEntry('shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=10;fillColor=#ffffff;edgeStyle=orthogonalEdgeStyle;', 60, 40, '', '水平折线'),
-				 this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;', 50, 50, '', '竖直折线', null, lineTags + 'elbow horizontal'),
-				 this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=vertical;endArrow=classic;html=1;', 50, 50, '', '折线', null, lineTags + 'elbow vertical')	
+		this.addEntry('curve', mxUtils.bind(this, function () {
+			var cell = new mxCell('', new mxGeometry(0, 0, 30, 30), 'curved=1;endArrow=classic;html=1;');
+			cell.geometry.setTerminalPoint(new mxPoint(0, 30), true);
+			cell.geometry.setTerminalPoint(new mxPoint(30, 0), false);
+			cell.geometry.points = [new mxPoint(30, 30), new mxPoint(0, 0)];
+			cell.geometry.relative = true;
+			cell.edge = true;
+
+			return this.createEdgeTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, '曲线');
+		})),
+		this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;', 30, 40, '', '曲线'),
+		this.createEdgeTemplateEntry('edgeStyle=isometricEdgeStyle;endArrow=none;html=1;elbow=vertical;', 30, 40, '', '曲线'),
+		this.createVertexTemplateEntry('shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;', 10, 40, '', '花括号'),
+		this.createVertexTemplateEntry('line;strokeWidth=1;html=1;', 40, 10, '', '横线'),
+		this.createVertexTemplateEntry('line;strokeWidth=1;direction=south;html=1;', 10, 40, '', '竖线'),
+		this.createVertexTemplateEntry('shape=crossbar;whiteSpace=wrap;html=1;rounded=1;', 40, 10, '', '横杆', false, null, '横杆'),
+		this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;', 50, 30, '', '部分矩形'),
+		this.createVertexTemplateEntry('shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;', 60, 30, '', '部分矩形'),
+		this.createEdgeTemplateEntry('edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;', 40, 40, '', '折线', null, '折线'),
+		this.createEdgeTemplateEntry('shape=filledEdge;rounded=0;fixDash=1;endArrow=none;strokeWidth=6;fillColor=#ffffff;edgeStyle=orthogonalEdgeStyle;', 50, 40, '', '水平折线'),
+		this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;', 40, 40, '', '竖直折线', null, '竖直折线'),
+		this.createEdgeTemplateEntry('edgeStyle=elbowEdgeStyle;elbow=vertical;endArrow=classic;html=1;', 40, 40, '', '折线', null, '折线')
 	];
-	
+
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);
 	this.setCurrentSearchEntryLibrary();
 };
